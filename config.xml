@@ -18,6 +18,10 @@
     <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
 	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
 	<plugin name="phonegap-plugin-push" spec="1.6.0">
+    <plugin name="phonegap-cookies-plugin-master" spec="0.0.1">
+	
+	
+	
 		<param name="SENDER_ID" value="299367865586" />
 	</plugin>
     <platform name="android">
