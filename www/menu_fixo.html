@@ -1,0 +1,799 @@
+﻿
+<script src="config_loja.js"></script>
+<link rel="stylesheet" type="text/css" href="Folha_Estilo.css" media="screen" />
+
+<script>
+//variavel global para liberar o scroll da pagina home, para aparecer mais produtos
+var habilitar_scroll = true;
+</script>
+
+<script>
+//var id_loja = "87";
+</script>
+
+
+<script>
+//verificar se não identificar nenhum usuario
+
+if(localStorage.id_usuario == ""){
+
+	//window.location.href="index.html";
+		
+}
+</script>
+
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+		
+<!--<img src="" width="100%" style=" position:fixed; background-color: #0054a6; top:0em; left:0%; height: 3em;" /> -->
+
+<div class="menu_superior" ></div> 
+
+
+<!-- 
+ <a href="pessoal.html" style="text-decoration: none;"><div style="width: 100%;" ><img id ="foto_perfil_menu" src="fotos/entrar_.png" style="position: fixed; left: 3%; top:0.1em; width:2.8em; height:2.8em;"/> <span id="nome_usuario" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3.3em; top:0.75em; color: white; font-weight: bold; "></span></div></a>
+-->
+
+<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 3%; top:0.1em; width:2.8em; "/></a></div>
+
+	
+<!---
+<table style=" position:fixed; width: 100%; background-color: #0054a6; bottom:-0.5em; left:0%; height: 3.5em;"  >
+
+
+	<tr>
+
+		<td style="text-align:center; width:20%;">
+			<a href="vitrine_virtual.html"><img id="menu_home" src="fotos/casa.png" width="100%" style=" position:relative;   width:2.8em; height:2.8em;" /> </a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="buscar_produtos.html"><img id="menu_busca" src="fotos/lupa.png" width="100%"  style=" position:relative; width:2.8em; height:2.8em;" /> </a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="chat.html" id="chat_link" ><img id="menu_chat" src="fotos/chat.png" width="100%"  style=" position:relative;9;  width:2.8em; height:2.8em;" /> </a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="promocoes.html"><img id="menu_promocoes" src="fotos/estrela.png" width="100%" style=" position:relative;  width:2.8em; height:2.8em;" /> </a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="pessoal.html"><img id="menu_pessoal" src="fotos/pessoa.png" width="100%" style=" position:relative;   width:2.8em; height:2.8em;" /> </a>
+		</td>
+
+	</tr>
+
+</table>
+-->
+
+<table class="menu_inferior" >
+
+
+	<tr>
+
+		<td style="text-align:center; width:20%;">
+			<a href="vitrine_virtual.html"><img id="menu_home" src="fotos/home.png" width="100%" style=" position:relative; top:-0.2em;  width:2.5em; " /><span id="n_produtos_novos" style="position:relative; font-size:12px; text-weight:bold; top:-5px; left:-5px; color:white;"></span></a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="meus_cupons.html" id="cupom_link"><img id="menu_cupons" src="fotos/meuscupons.png" width="100%"  style=" position:relative; top:-0.2em; width:2.5em; " /> </a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="chat.html" id="chat_link" ><img id="menu_chat" src="fotos/mensagens.png" width="100%"  style=" position:relative; top:-0.2em;  width:2.5em; " /><span id="novas_mensagens" style="position:relative; font-size:12px; text-weight:bold; top:-5px; left:-5px; color:white;"></span></a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="promocoes.html"><img id="menu_promocoes" src="fotos/promocoes.png" width="100%" style=" position:relative; top:-0.2em;  width:2.5em; " /> </a>
+		</td>
+		<td style="text-align:center; width:20%;">
+			<a href="pessoal.html" id="pessoal_link"><img id="menu_pessoal" src="fotos/perfil.png" width="100%" style=" position:relative;  top:-0.2em;	 width:2.5em; " /> </a>
+		</td>
+
+	</tr>
+
+</table>
+
+
+
+<script>
+//Se for lojista mudar link de chat para chat_lojista
+
+if( localStorage.tipo_login == 'lojista'){
+
+	document.getElementById('chat_link').setAttribute('href','lista_usuarios_do_lojista_chat.html');
+	document.getElementById('pessoal_link').setAttribute('href','pessoal_loja.html');
+	document.getElementById('cupom_link').setAttribute('href','meus_cupons_loja.html');
+	document.getElementById('menu_pessoal').src = 'fotos/engrenagem.png';
+	
+}else{
+	
+	document.getElementById('chat_link').setAttribute('href','chat.html');
+	document.getElementById('pessoal_link').setAttribute('href','pessoal.html');
+	document.getElementById('cupom_link').setAttribute('href','meus_cupons.html');
+
+}//fim do else
+
+</script>
+
+<script>
+
+/*
+if( ( (localStorage.foto_usuario) != '') && (typeof (localStorage.foto_usuario) !== "undefined") ) document.getElementById("foto_perfil_menu").src = localStorage.foto_usuario;
+
+var nome_menu = localStorage.nome_usuario;
+
+var pos_espaco = nome_menu.indexOf(" ");
+
+//definir tamanho do nome
+if(nome_menu.length > 12){
+	nome_menu = nome_menu.substring(0,pos_espaco);
+}
+
+document.getElementById("nome_usuario").innerHTML = nome_menu;
+*/
+</script>		
+
+
+
+
+<div id="novidades" ></div>
+
+<!-- Quando a notificação for aberta alterar a data de vizualização -->
+<script type="text/javascript">
+//Carregar Lampada de novidades
+					
+					var xmlHttp2; 
+					
+					function createXMLHttpRequest_abrir_novidades() {
+					if (window.ActiveXObject) {
+					xmlHttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					else if (window.XMLHttpRequest) {
+					xmlHttp2 = new XMLHttpRequest();
+					}
+					}
+
+					function startRequest_abrir_novidades() {
+					createXMLHttpRequest_abrir_novidades();
+					xmlHttp2.onreadystatechange = handleStateChange_abrir_novidades;
+					
+					//xmlHttp2.open("POST", "https://acheloja.com/validar/abrir_novidades.php", true);
+					xmlHttp2.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/abrir_novidades.php", true);
+					
+					
+					xmlHttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+					xmlHttp2.send("id_usuario="+localStorage.id_usuario+"");
+					
+					
+					}
+
+					
+					function handleStateChange_abrir_novidades() {
+					if(xmlHttp2.readyState == 4) {
+					if(xmlHttp2.status == 200) {
+						
+						window.location.href = "home.html";
+						
+					
+					}
+					}
+					}		
+
+					
+					function createXMLHttpRequest_novidades() {
+					if (window.ActiveXObject) {
+					xmlHttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					else if (window.XMLHttpRequest) {
+					xmlHttp2 = new XMLHttpRequest();
+					}
+					}
+
+					function startRequest_novidades() {
+					createXMLHttpRequest_novidades();
+					xmlHttp2.onreadystatechange = handleStateChange_novidades;
+					
+					//xmlHttp2.open("POST", "https://acheloja.com/m/ajax_novidades_usuario_app.php", true);
+					//xmlHttp2.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novidades_usuario_app.php", true);
+					xmlHttp2.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novidades_usuario_app.php", true);
+					
+					
+					xmlHttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+					xmlHttp2.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"");
+					
+					
+					}
+
+					
+					function handleStateChange_novidades() {
+					if(xmlHttp2.readyState == 4) {
+					if(xmlHttp2.status == 200) {
+					
+						var str = xmlHttp2.responseText.trim();
+				
+						var marcador_novidades = str.indexOf("#n");
+						
+						document.getElementById("novidades").innerHTML = document.getElementById("novidades").innerHTML + str.substring(0, marcador_novidades);
+						
+						//var novidades = str.substring((marcador_novidades+2), str.length);
+						
+						
+						//document.getElementById("n_produtos_novos").innerHTML = novidades;
+						
+						
+						//if(novidades != '0') document.title = "(" + novidades.trim() + ") "+document.title;
+							
+						
+					
+					}else{
+						
+						document.getElementById("nome_loja").innerHTML = 'Sem internet!';
+					}
+					}
+					}		
+
+					//Executar função para ver se tem novidades
+					startRequest_novidades();
+</script>
+
+
+
+<!-- Quando a notificação for aberta alterar a data de vizualização -->
+<script type="text/javascript">
+//Carregar Lampada de novidades
+					
+					var xmlHttp3; 
+					
+					var str;
+					
+					function createXMLHttpRequest_novas_msgs_chat() {
+					if (window.ActiveXObject) {
+					xmlHttp3 = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					else if (window.XMLHttpRequest) {
+					xmlHttp3 = new XMLHttpRequest();
+					}
+					}
+
+					function startRequest_novas_msgs_chat() {
+					createXMLHttpRequest_novas_msgs_chat();
+					xmlHttp3.onreadystatechange = handleStateChange_novas_msgs_chat;
+					
+					//xmlHttp3.open("POST", "https://acheloja.com/m/ajax_novidades_usuario_app.php", true);
+					//xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novidades_usuario_app.php", true);
+					xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novas_msgs_chat.php", true);
+					
+					
+					xmlHttp3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+					xmlHttp3.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&tipo_login="+localStorage.tipo_login+"");
+					
+					
+					}
+
+					
+					function handleStateChange_novas_msgs_chat() {
+					if(xmlHttp3.readyState == 4) {
+					if(xmlHttp3.status == 200) {
+					
+						str = xmlHttp3.responseText.trim();
+						
+						document.getElementById("novas_mensagens").innerHTML = str;
+						
+						
+					}
+					}
+					}		
+
+					///Executar função para ver se tem novidades
+					startRequest_novas_msgs_chat();
+					
+						
+</script>
+
+				<script> 
+				
+						$(function(){
+						
+						  setInterval(function(){ 
+										startRequest_novas_msgs_chat();
+						  }, 2000);
+						  
+						});
+				
+					</script> 
+
+
+<script type="text/javascript">
+		var aberto=0;
+		
+		function abrir_balao_notificacao(){
+			
+			if(aberto == 0){
+				document.getElementById("notificacao").style.visibility="visible";
+				aberto = 1;
+			}else{
+			
+				if(aberto == 1){
+					document.getElementById("notificacao").style.visibility="hidden";
+					aberto = 0;
+				}
+			}
+		}
+		
+</script>
+
+<script type="text/javascript">
+$(function () {
+		
+       $(window).scroll(function () {
+			//if($(window).scrollTop() + $(window).height() > $(document).height()-50000) {
+					  //alert("foi");
+					 document.getElementById("notificacao").style.visibility="hidden";
+					 aberto = 0;
+			 //}
+		});
+});
+
+
+</script>
+
+
+<script language="javascript" type="text/javascript">
+	
+	function chamar_vitrine(nick_site, id_anuncio, id_produto){
+	
+		document.getElementById('iframe_vitrine_loja').src = "http://acheloja.com/m/carregando_app.php";
+		
+		//document.getElementById("img_carregando").style.visibility = "visible";
+		
+		if( (id_produto != '') || (id_produto != null) ){
+		
+			startRequest_clique_produtos(id_anuncio, id_produto, localStorage.id_usuario);
+		
+		}
+		
+		
+		localStorage.nick_site = nick_site;
+		
+		//window.location.href="vitrine_virtual.html";
+		document.getElementById('iframe_vitrine_loja').src = 'vitrine_virtual.html'; 
+		document.getElementById('div_produtos').style.visibility = 'hidden';
+		habilitar_scroll = false; 
+		document.getElementById('div_vitrine_loja').style.visibility = 'visible';
+		document.getElementById('iframe_vitrine_loja').style.visibility = 'visible'; 
+		
+		
+
+	}
+
+</script>
+
+
+<script>
+
+function recarregar_iframe(){
+
+	document.getElementById('iframe_vitrine_loja').src = 'vitrine_virtual.html';
+
+}
+
+</script>
+
+
+<script>
+//Conta o clique no produto do anunciante
+			 
+			function createXMLHttpRequest_clique_produtos() {
+			if (window.ActiveXObject) {
+			xmlHttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp2 = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_clique_produtos(id_anuncio, id_produto, id_usuario) {
+			createXMLHttpRequest_clique_produtos();
+			xmlHttp2.onreadystatechange = handleStateChange_clique_produtos;
+			
+			xmlHttp2.open("POST", "https://acheloja.com/validar/cliques_ajax.php", true);
+			xmlHttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp2.send("id="+id+"&tipo=clique_produto");
+			xmlHttp2.send("id="+id_anuncio+"&tipo=clique_produto&id_usuario="+id_usuario+"&id_produto="+id_produto+"");
+			
+			
+			
+			
+		
+			}
+
+			
+			function handleStateChange_clique_produtos() {
+			if(xmlHttp2.readyState == 4) {
+			if(xmlHttp2.status == 200) {
+				
+				//Não fazer nada
+				
+				
+			}
+			}
+			}
+</script>
+
+<script>			
+		//Conta o visualização do produto do anunciante
+					
+					
+					 
+					function createXMLHttpRequest_visualizacao_produtos() {
+					if (window.ActiveXObject) {
+					xmlHttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					else if (window.XMLHttpRequest) {
+					xmlHttp2 = new XMLHttpRequest();
+					}
+					}
+					
+					
+					function startRequest_visualizacao_produtos(id) {
+					createXMLHttpRequest_visualizacao_produtos();
+					xmlHttp2.onreadystatechange = handleStateChange_visualizacao_produtos;
+					
+					xmlHttp2.open("POST", "https://acheloja.com/validar/cliques_ajax.php", true);
+					xmlHttp2.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+					xmlHttp2.send("id="+id+"&tipo=visualizacao_produto");
+					
+					
+					
+					
+				
+					}
+
+					
+					function handleStateChange_visualizacao_produtos() {
+					if(xmlHttp2.readyState == 4) {
+					if(xmlHttp2.status == 200) {
+						
+						
+						//Não fazer nada
+						 
+						
+					}
+					}
+					}			
+
+</script>
+
+
+<script>
+
+if (typeof pagina_atual_app === 'undefined') {
+    
+	var pagina_atual_app = '';
+	
+}//fim do if
+
+
+</script>
+
+
+	<div class="app" style="visibility:hidden;">
+        <div id="deviceready" class="blink" style="visibility:hidden;">
+            <p class="event listening"></p>
+            <p class="event received"></p>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+	
+    <script type="text/javascript">
+	var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+		setupPush();
+    }
+};
+
+//"senderID": "121897226764",
+
+function setupPush() {
+    
+	
+	if( (pagina_atual_app == 'chat') || (pagina_atual_app == 'chat_lojista') ){
+		
+		var push = PushNotification.init({
+			 "android": {
+				 "senderID": "299367865586",
+				 "forceShow": "false"
+			 },
+			 "ios": {
+			   "sound": true,
+			   "alert": true,
+			   "badge": true,
+			   "categories": {
+				 "newmusic": {
+					 "yes": {
+						 "callback": "playMusic", "title": "Play",
+						 "foreground": true, "destructive": false
+					 },
+					 "no": {
+						 "callback": "archive", "title": "Archive",
+						 "foreground": false, "destructive": false
+					 }
+				 }
+			   }
+			 },
+			 "windows": {}
+		});
+		
+	}else{
+	
+		var push = PushNotification.init({
+			 "android": {
+				 "senderID": "299367865586",
+				 "forceShow": "true"
+			 },
+			 "ios": {
+			   "sound": true,
+			   "alert": true,
+			   "badge": true,
+			   "categories": {
+				 "newmusic": {
+					 "yes": {
+						 "callback": "playMusic", "title": "Play",
+						 "foreground": true, "destructive": false
+					 },
+					 "no": {
+						 "callback": "archive", "title": "Archive",
+						 "foreground": false, "destructive": false
+					 }
+				 }
+			   }
+			 },
+			 "windows": {}
+		});
+		
+	}//fim do else
+	
+
+   push.on('registration', function(data) {
+      // console.log("registration event: " + data.registrationId);
+       var oldRegId = localStorage.id_dispositivo;
+	   //alert('id: '+data.registrationId);
+	   //document.getElementById("email").value = data.registrationId;
+	   
+	    if( localStorage.mudou_de_usuario == "1" ){
+		   
+				localStorage.id_dispositivo = data.registrationId;
+				startRequest_id_push(data.registrationId);
+				 localStorage.mudou_de_usuario = "0";
+				 
+		}else{
+		
+			if(oldRegId !== data.registrationId) {
+			   // Save new registration ID
+			   localStorage.id_dispositivo = data.registrationId;
+			   startRequest_id_push(data.registrationId);
+			   // Post registrationId to your app server as the value has changed
+			}
+		
+		}//fim do else
+		
+   });
+
+   push.on('error', function(e) {
+       console.log("push error = " + e.message);
+   });
+   
+	 
+	 push.on('notification', function(data) {
+	 
+     console.log('notification event');
+	 
+	 
+     var link = data.additionalData.link;
+	 
+	 if (link == 'home') {
+	 
+		//window.location.href = "home.html";
+        window.location.href = "vitrine_virtual.html";		
+		
+     }else{
+		
+		if (link == 'meus_cupons') {
+		
+			window.location.href = "meus_cupons.html";	 
+		
+		}else{
+			
+			if (link == 'promocoes') {
+		
+				window.location.href = "promocoes.html";	 
+		
+			}else{
+				if (link == 'chat') {
+		
+					if( (pagina_atual_app != 'chat') && (pagina_atual_app != 'chat_lojista') ){ window.location.href = "chat.html"; }
+					//startRequest_chat();
+					
+		
+				}else{
+					  
+					    if (link == 'chat_lojista') {
+		
+					       if( (pagina_atual_app != 'chat') && (pagina_atual_app != 'chat_lojista') ){ window.location.href = "lista_usuarios_do_lojista_chat.html"; }
+						   //startRequest_chat();
+		
+				        }else{
+							   if (link == 'aviso_geral') {
+		
+									window.location.href = "aviso_geral.html";	
+					      
+								}else{
+								 /*  navigator.notification.alert(
+									   data.message,         // message
+									   null,                 // callback
+									   data.title,           // title
+									   'Ok'                  // buttonName
+								   );   
+								  */
+								}//fim do else
+				  		}//fim do else  
+			    }//fim do else
+		   }//fim do else
+		   
+		}//fim do else
+		
+     }//fim do else
+	 
+	 /*
+     if (link) {
+       showLink(link);
+     } else {
+       navigator.notification.alert(
+           data.message,         // message
+           null,                 // callback
+           data.title,           // title
+           'Ok'                  // buttonName
+       );         
+     }
+	 */
+
+	push.finish(function() {
+			 console.log('success');
+		 }, function() {
+			 console.log('error');
+		 });     
+	 });
+		 
+	 function playMusic() {
+	   alert("Play Music!");	
+	 }
+
+	 function archive() {
+	   alert("Archived!");
+	 }
+	 
+	 function showLink(link) {
+	   //document.getElementsByName("q")[0].value = artist;
+	   //searchSubmit(new CustomEvent("noop"));
+	   
+	   //confirm('Mt bom');
+	  //if(link == true){
+	  
+	  
+		    //window.location.href = "home.html";
+			window.location.href = "vitrine_virtual.html";
+
+			
+	   //}//fim do if
+	  
+	 }
+	 
+	 
+		
+ } //fim da function
+ 
+	</script>
+    <script type="text/javascript">
+	
+        app.initialize();	
+    </script>
+
+
+   	
+<!-- Validação do forumlário -->
+<script type="text/javascript">
+
+			var xmlHttp3;
+			
+			function createXMLHttpRequest_versao_app() {
+			if (window.ActiveXObject) {
+			xmlHttp3 = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp3 = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_versao_app(){
+			createXMLHttpRequest_versao_app();
+			xmlHttp3.onreadystatechange = handleStateChange_versao_app;
+			
+			
+			//xmlHttp.open("POST", "https://acheloja.com/m/login_app.php", true);
+			
+			xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_versao_app.php", true);
+			
+			
+			
+			xmlHttp3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+				if( localStorage.id_dispositivo != ''){
+					xmlHttp3.send("reg_id="+localStorage.id_dispositivo+"&versao_app="+versao_app+"");
+				}//fim do if
+			
+			}
+
+			
+			function handleStateChange_versao_app() {
+			if(xmlHttp3.readyState == 4) {
+			if(xmlHttp3.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+				
+				if( localStorage.id_dispositivo != ''){
+					localStorage.versao_app = versao_app;
+				}//fim do if
+				
+			}
+			}
+			}
+			
+		if(localStorage.versao_app != versao_app) startRequest_versao_app();
+			
+			
+			
+</script> 	
+			
+	
+<div id="img_carregando" style=" position: fixed; visibility: hidden; top:0em; left:-1%; height:100%; width:102%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
+	 <center>
+		<img  src="fotos/carregando_produtos.gif" style="border-radius:25px; position: relative; top:17em;  width:70%;" />
+	 </center>
+ </div>
+
+ <!--
+ <div id="img_carregando" style=" position: fixed; visibility: hidden; top:0em; height:100%; width:100%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
+	 <center>
+		<img  src="fotos/carregando_produtos.gif" style="border-radius:25px; position: relative; top:17em;  width:90%;" />
+	 </center>
+ </div>
+ -->

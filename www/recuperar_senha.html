@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<script src="config_loja.js"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+
+<meta name="google-site-verification" content="Wiq9h-MVFjBO3hYHciruU4k0Wk08XVFGfFgvRQi_YPM" />
+
+<meta name="Keywords" content="publicar, publicar do brasil, listaonline, lista online, guia, guia de lojas, empresa, acheloja.com, lojas, loja, lista, busca de lojas, busca de produtos, guia local, busca local, consulta serviços produtos, lista telefonica, telefones, endereços." />
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+
+<meta name="description" content="Você escolhe o que quer comprar e onde, e o acheloja.com acha o estabelecimento mais próximo de você!">
+
+
+<link rel="stylesheet" type="text/css" href="Folha_Estilo.css" media="screen" />
+
+<style>
+::-webkit-input-placeholder {
+   color: gray;
+   font: 0.6em 'Montserrat', sans-serif;
+   font-weight: 250;
+}
+
+:-moz-placeholder {
+   color: gray;
+   font: 0.6em 'Montserrat', sans-serif;
+   font-weight: 250;
+}
+
+::-moz-placeholder {
+   color: gray;  
+   font: 0.6em 'Montserrat', sans-serif;
+   font-weight: 250;
+}
+
+:-ms-input-placeholder {  
+   color: gray;  
+   font: 0.6em 'Montserrat', sans-serif;
+   font-weight: 250;
+}
+</style>
+
+
+
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<script>
+
+localStorage.primeiro_acesso = 0;
+
+//Para validar email
+	
+	var email_valido = 0;
+			
+			function ValidarEmail(obj){
+				//var obj = eval("document.getElementById(\"email\")");
+				
+				var txt = obj.value;
+				
+				var filtro = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+				if(filtro.test(txt) || txt.length == 0) {
+					
+						//document.getElementById("email_aviso").innerHTML = "";
+						//email_valido = 1;
+						return true;
+					
+				} 
+				else {
+					
+					alert('Email com formato incorreto, verificar se não houve erro na escrita!');
+					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_incorreto']; ?>";
+					email_valido = 0;
+					obj.focus();
+					return false;
+					
+				}
+				if(txt.length == 0 ){
+				  return false;
+				}
+				
+			}		
+
+
+</script>
+
+
+
+<title>Sistematize</title>
+</br></br>
+
+
+</head>
+     <body style="position: absolute; height:100%; width:96%; top:0%; left:0%;">
+	
+		<script>
+			var windowHeight = window.innerHeight;
+			document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
+			//alert(windowHeight);
+		</script>
+	
+
+	<center>
+			<img style="position:relative; width:50%; top:2.5em; " src="fotos/logo2.png" />
+			
+			
+			<form action="">
+					
+				<span class="" style="position: relative; top:3em; height: 1.5em; width:90%;  font-size:1.5em; "> Recuperar Senha</span>
+				<input id="email" name="email" type="text" style="position: relative; top:3.5em; height: 1.5em; width:90%;  font-size:1.5em; "  placeholder=" Digite seu E-mail para receber sua senha" />
+	
+				
+			</form>
+			
+			<input class="button button2" style="position: relative; top:6em; width:60%;" onclick="startRequest_recuperar_senha()" type="submit" Value="Recuperar Senha"/>
+				
+			
+					
+		</center>
+			
+			<a style="text-decoration: none;" href="index.html"><img src="fotos/seta_voltar.png" style="position:fixed; top:0%;left:0%; font-size:2em; width:1em;" /></a>
+
+<!-- Validação do forumlário -->
+<script type="text/javascript">
+			var xmlHttp;
+			var str;
+
+			function createXMLHttpRequest_recuperar_senha() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_recuperar_senha() {
+				createXMLHttpRequest_recuperar_senha();
+				xmlHttp.onreadystatechange = handleStateChange_recuperar_senha;
+				 
+				 document.getElementById("img_carregando").style.visibility = "visible";
+				 
+				 ///Verificar se campo está vazio
+				  if(document.getElementById("email").value == ''){
+							
+							alert("Preencha o seu email!");
+							document.getElementById("email").focus();
+							document.getElementById("img_carregando").style.visibility = "hidden";
+							return false;
+					}
+					
+				if(ValidarEmail(document.getElementById("email")) == false){
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+				}
+				
+				//xmlHttp.open("POST", "https://acheloja.com/m/ajax_recuperar_senha_app.php", true);
+				xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_recuperar_senha_app.php", true);
+				
+				xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				
+				xmlHttp.send("email="+document.getElementById("email").value);
+			
+			}
+
+			
+			function handleStateChange_recuperar_senha() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			
+				document.getElementById("img_carregando").style.visibility = "hidden";
+				
+				str = xmlHttp.responseText.trim();
+				
+				str = str.trim();
+				
+				
+				if(str == "1"){
+					
+					alert("Senha recuperada com sucesso! Sua senha foi enviada para seu e-mail...");
+					window.location.href="index.html";
+					exit();
+					
+				}else{
+					
+					if(str == "0"){
+					
+						alert("Email não encontrado! Tente novamente!");
+						
+					}else{
+					
+						alert('Aconteceu algum erro, tente novamente!');
+					
+					}//fim do else
+					
+				}//fim do else
+				
+				
+				
+				
+			}else{
+			
+			
+				document.getElementById("img_carregando").style.visibility = "hidden";
+				alert("Sem Conexão com a Internet");
+				
+			}
+			}
+			}
+			
+			
+</script>   
+
+<div id="resp"></div>
+
+
+<div id="img_carregando" style=" position: fixed; visibility: hidden; top:0em; left:-1%; height:100%; width:102%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
+	 <center>
+		<img  src="fotos/carregando_produtos.gif" style="border-radius:25px; position: relative; top:17em;  width:70%;" />
+	 </center>
+ </div>
+			
+</body>
+	
+	
+</html>

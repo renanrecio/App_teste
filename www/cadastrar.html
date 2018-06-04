@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script src="config_loja.js"></script>
+
+<script>
+//var id_loja = '87';
+</script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+
+<meta name="google-site-verification" content="Wiq9h-MVFjBO3hYHciruU4k0Wk08XVFGfFgvRQi_YPM" />
+
+<meta name="Keywords" content="publicar, publicar do brasil, listaonline, lista online, guia, guia de lojas, empresa, acheloja.com, lojas, loja, lista, busca de lojas, busca de produtos, guia local, busca local, consulta serviços produtos, lista telefonica, telefones, endereços." />
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+
+<meta name="description" content="App">
+
+
+<link rel="stylesheet" type="text/css" href="Folha_Estilo.css" media="screen" />
+
+
+
+
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+
+localStorage.primeiro_acesso = 0;
+
+var xmlHttp;
+
+			function createXMLHttpRequest() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_cadastrar() {
+			createXMLHttpRequest();
+			xmlHttp.onreadystatechange = handleStateChange;
+			
+				
+			//xmlHttp.open("POST", "https://acheloja.com/m/ajax_cadastra_usuario_app.php", true);
+			
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_cadastra_usuario_app.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send("id_loja=" + id_loja + "&nome=" + document.getElementById("nome").value + "&email=" + document.getElementById("email").value +  "&senha=" + document.getElementById("senha").value + "");
+			
+			
+			
+			//document.getElementById("msg_enviado").style.visibility = "visible";
+			
+			//alert("Emails enviados com Sucesso!");
+			}
+
+			var id_usuario;
+			function handleStateChange() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				var str = xmlHttp.responseText.trim();
+				
+				str = str.trim();
+				
+				if(str != ''){
+				
+						
+						
+						var pos_id = str.indexOf("#id");
+						var pos_nome = str.indexOf("#nome");
+						var pos_email = str.indexOf("#email"); 
+						
+						
+						//alert(str);
+						
+						localStorage.id_usuario = str.substring((pos_id+3), pos_nome);
+						localStorage.nome_usuario = str.substring((pos_nome+5), pos_email);
+						localStorage.email_usuario = str.substring((pos_email+6), str.length);
+						
+						localStorage.tipo_login = 'usuario'; //Pois só é possivel fazer cadastro pelo App de usuarios
+
+						//form[0].submit;
+						//window.location.href="home.html";
+						localStorage.mudou_de_usuario = "1";
+						
+						//alert(str);
+						//alert(localStorage.id_usuario);
+
+						//form[0].submit;
+						//window.location.href="home.html";
+						window.location.href="vitrine_virtual.html";
+						exit();	
+							
+				}else{
+					
+					
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					alert('Ocorreu algum erro, tente novamente');
+					
+				}//fim do else
+				
+				
+				
+			
+			}
+			}
+			}
+			
+			
+	//Para validar email
+	
+	var email_valido = 0;
+			
+			function ValidarEmail(obj){
+				//var obj = eval("document.getElementById(\"email\")");
+				
+				var txt = obj.value;
+				
+				var filtro = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+				if(filtro.test(txt) || txt.length == 0) {
+					
+						//document.getElementById("email_aviso").innerHTML = "";
+						//email_valido = 1;
+						return true;
+					
+				} 
+				else {
+					
+					alert('Email com formato incorreto, verificar se não houve erro na escrita!');
+					
+					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_incorreto']; ?>";
+					email_valido = 0;
+					obj.focus();
+					return false;
+					
+				}
+				if(txt.length == 0 ){
+				  return false;
+				}
+				
+			}		
+			
+			function sleep(milliseconds) {
+			  var start = new Date().getTime();
+			  for (var i = 0; i < 1e7; i++) {
+				if ((new Date().getTime() - start) > milliseconds){
+				  break;
+				}
+			  }
+			}
+
+		//Verifica se o email já existe no BD 
+			
+			function createXMLHttpRequest4() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_email() {
+			createXMLHttpRequest4();
+			xmlHttp.onreadystatechange = handleStateChange4;
+			
+			document.getElementById("img_carregando").style.visibility = "visible";
+			
+			   if(document.getElementById("nome").value == ''){
+					
+					alert("Preencha o seu nome!");
+					document.getElementById("nome").focus();
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+					
+				}
+				
+				
+			    if(document.getElementById("email").value == ''){
+						
+						alert("Preencha o seu email!");
+						document.getElementById("email").focus();
+						document.getElementById("img_carregando").style.visibility = "hidden";
+						return false;
+				}
+				
+				if(document.getElementById("confirmar_email").value == ''){
+					
+					alert("Preencha o campo confirmar email!");
+					document.getElementById("confirmar_email").focus();
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+					
+				}
+				
+				if(document.getElementById("confirmar_email").value != document.getElementById("email").value){
+					
+					alert("O email e a confirmação do email estão diferentes! Corrija, por favor!");
+					document.getElementById("email").focus();
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+					
+				}
+				
+				
+				if(document.getElementById("senha").value == ''){
+					
+					alert("Preencha o campo senha!");
+					document.getElementById("senha").focus();
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+					
+				}
+				
+				if(ValidarEmail(document.getElementById("email")) == false){
+					
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+				}
+				
+				if(ValidarEmail(document.getElementById("confirmar_email")) == false){
+					
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+				}
+			
+			
+			//xmlHttp.open("GET", "https://acheloja.com/validar/email.php?email="+document.getElementById("email").value+"", true);
+			
+			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/email.php?email="+document.getElementById("email").value+"&id_loja="+id_loja+"", true);
+			
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+		
+			}
+
+			
+			function handleStateChange4() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			
+				if(xmlHttp.responseText.trim() == "1"){
+					
+					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_ja_cadastrado']; ?>";
+					alert("Email já cadastrado, verifique se já possui cadastro no App!")
+					document.getElementById("email").focus();
+					document.getElementById("img_carregando").style.visibility = "hidden";
+					return false;
+					
+				}else{
+				
+					//Se o email ainda não existir pode cadastrar
+					startRequest_cadastrar();
+					
+				}
+				
+						
+				
+				
+			}else{
+			
+			
+				document.getElementById("img_carregando").style.visibility = "hidden";
+				//alert("Sem Conexão com a Internet");
+				
+			}
+			}
+			}
+</script>
+
+
+
+<title>App</title>
+</br></br>
+
+
+</head>
+     <body style="position: absolute; height:100%; width:96%; top:0%; left:0%;">
+	
+		<center>
+			<img style="position:relative; width:50%; top:1em; " src="fotos/logo2.png" />
+			
+			
+			<form action="">
+					
+				<input id="nome" name="nome" type="text" style="position: relative; top:2em; height: 1.5em; width:90%;  font-size:1.5em "   placeholder=" Nome" />
+				<input id="email" name="email" type="text" style="position: relative; top:2.5em; height: 1.5em; width:90%;  font-size:1.5em; "   placeholder=" E-mail" />
+				<input id="confirmar_email" name="confirmar_email"  type="text" style="position: relative; top:3em; height: 1.5em; width:90%;  font-size:1.5em"   placeholder=" Confirmar E-mail" />
+				<input id="senha" name="senha" type="password" style="position: relative; top:3.5em; height: 1.5em; width:90%;  font-size:1.5em "  placeholder=" Senha" />
+			
+			</form>
+			
+			
+			<input class="button button2" style="position: relative; top:5em;" type="button"  onclick="startRequest_email()"  Value="Cadastrar"/>
+				
+			<div style="position: relative; top: 5em; width:100%;">	
+			
+			<p  style="cursor: pointer;  color: #6b6b6b; position: absolute; top:2em; width:80%; left:10%; font-size:1em;" onclick="abrir_termos_de_uso()" >Ao clicar em Cadastrar você está de acordo com os <b><u>Termos de uso</u></b></p>
+			
+				<!--<a href="cadastrar.html" style="text-decoration:none;"><span style="position:absolute; top:6.5em; width:80%; left:10%; color:#0070a1; font-weight: bolder; font-size:1.1em;"> Não possui Cadastro? </br>Clique aqui para se Cadastrar...</span></a>-->
+			</div>
+					
+		</center>
+		
+	
+	
+		<!--<a style="text-decoration: none;" href="index.html"><span style="position:fixed; top:0%;left:0%; font-size:3em;">⇦</span></a>-->
+		
+		<a style="text-decoration: none;" href="index.html"><img src="fotos/seta_voltar.png" style="position:fixed; top:0%;left:0%; font-size:2em; width:1em;" /></a>
+	
+	
+
+	
+<table width="100%" onclick = "fechar_termos_de_uso()" id="fundo_termo_de_uso" style="visibility: hidden; position:absolute;  top:-1%;  left:-1%;  height: 110%; width:102%; background-color: black; opacity:0.70; filter:alpha(opacity=70);">
+</table> 
+<div id="termo_de_uso" style="visibility: hidden; overflow-y: auto; position: fixed; top:10%; height: 80%; left: 5%; width:90%; background-color: white; opacity:0.90; filter:alpha(opacity=90);">
+ 
+ </div>
+ 
+ <script> 
+    function abrir_termos_de_uso(){
+		
+		document.getElementById("fundo_termo_de_uso").style.visibility = "visible";
+		document.getElementById("termo_de_uso").style.visibility = "visible";
+		
+	}
+	
+	function fechar_termos_de_uso(){
+		
+		document.getElementById("fundo_termo_de_uso").style.visibility = "hidden";
+		document.getElementById("termo_de_uso").style.visibility = "hidden";
+		
+	}
+	
+	$(document).keydown(function(e) {
+    // ESCAPE key pressed
+		if (e.keyCode == 27) {
+			fechar_termos_de_uso();
+		}
+	});
+	
+</script>  
+
+
+ <div id="img_carregando" style=" position: fixed; visibility: hidden; top:0em; left:-1%; height:100%; width:102%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
+	 <center>
+		<img  src="fotos/carregando_produtos.gif" style="border-radius:25px; position: relative; top:17em;  width:70%;" />
+	 </center>
+ </div>
+		
+</body>
+	
+		<script>
+			var windowHeight = window.innerHeight;
+			document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
+			//alert(windowHeight);
+		</script>	
+	
+
+	
+	
+<script>
+
+	function createXMLHttpRequest_termos() {
+		if (window.ActiveXObject) {
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		else if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();
+		}
+	}
+
+	function startRequest_termos() {
+	
+		createXMLHttpRequest_termos();
+		xmlHttp.onreadystatechange = handleStateChange_termos;
+		
+			
+		//xmlHttp.open("POST", "https://acheloja.com/m/ajax_termos_de_uso.php", true);
+		
+		
+		xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_termos_de_uso.php", true);
+		xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		
+		//xmlHttp.send();
+		
+		xmlHttp.send("id_loja=" + id_loja + "");
+			
+		
+	
+	
+	}
+
+	function handleStateChange_termos() {
+	if(xmlHttp.readyState == 4) {
+	if(xmlHttp.status == 200) {
+	
+		var str = xmlHttp.responseText.trim();
+						
+		if(str != ''){
+		
+				document.getElementById("termo_de_uso").innerHTML = str; 
+				
+										
+		}else{
+			
+			alert('Ocorreu algum erro, tente novamente');
+			
+		}//fim do else
+		
+		
+		
+	
+	}
+	}
+	}
+	
+		
+		
+	startRequest_termos();
+
+			
+</script>			
+
+</html>

@@ -1,0 +1,57 @@
+﻿<html>
+<head>
+<script src="config_loja.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="Folha_Estilo.css" media="screen" />
+
+
+
+</head>
+
+<!-- <body style="position: absolute; height:100%; width:96%; top:0%; left:0%; background: linear-gradient(#475b27, #88b04b);">-->
+
+ <body  class="body_das_telas_iniciais_boas_vindas">
+
+
+		
+		<div class="div_boas_vindas_pg1" >
+			<img style="position:relative; width:50%; top:2em; " src="fotos/logo2.png" />
+		</div>	
+		
+		<center>
+			<p style="position:relative; top:0em; font-size: 2em; font-family:Montserrat; color: white; font-weight: bold;">BEM-VINDO(A)!</p>
+
+			<p style="position:relative; top:1em; font-size: 1.25em; font-family:Montserrat; color: white; font-weight: bold;">Aplicativo do(a) </br> <span id="nome_da_loja_do_app" style="color: white; font-weight: bold;" ></span> </p>
+
+			  <center style="position:relative; top:2em;">
+			  <span class="dotfull"></span>
+			  <span class="dotempty"></span>
+			  <span class="dotempty"></span>
+			  <span class="dotempty"></span>
+			  </center>
+			  
+			<center>
+			<a href="tela_inicial_pg2.html"><input class="button button3" style="position: relative; top:3.5em;" type="button" Value="Próximo"/></a>
+			
+			
+			<a href="index.html" style="text-decoration:none;"><p style="position:relative; top:5em; color: white; ">pular</p></a>
+			</center>
+			
+		
+		
+		<!--<input type="button" value="Cadastre-se" class="botao_cadastro_login_pg_inicial"  />
+		<input type="button" value="Entre" class="botao_entre_login_pg_inicial"  /> -->
+		
+		</center>
+		
+
+	<script>
+		document.getElementById('nome_da_loja_do_app').innerHTML = nome_da_loja_do_app;
+		localStorage.primeiro_acesso = 0;
+	</script>
+
+</body>
+
+
+</html>
+
