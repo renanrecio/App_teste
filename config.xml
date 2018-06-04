@@ -20,9 +20,6 @@
 	<plugin name="phonegap-plugin-push" spec="1.6.0">
 		<param name="SENDER_ID" value="299367865586" />
 	</plugin>
-	
-	<plugin name="phonegap-cookies-plugin-master" />
-	
     <platform name="android">
 		<icon src="icone.png"/>
 	    <icon src="www/icone.png"/>
