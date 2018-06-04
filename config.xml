@@ -21,7 +21,7 @@
 		<param name="SENDER_ID" value="299367865586" />
 	</plugin>
 	
-	<plugin name="phonegap-cookies-plugin-master" spec="0.0.1" />
+	<plugin name="phonegap-cookies-plugin-master" />
 	
     <platform name="android">
 		<icon src="icone.png"/>
