@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<script src="config_loja.js"></script>
+
+
+ <link rel="stylesheet" href="lib/font-awesome-4.5.0/css/font-awesome.min.css" />
+
+  <title>Sistematize</title>
+  
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+
+<style>
+p, input, span,a,li,placeholder,select,option,td,tr{
+	font-family: 'Montserrat', sans-serif;
+}
+
+body{
+	
+	background-color: #F9F9F9;
+}
+</style>
+</head>
+
+ <body>
+			  
+		<link rel="stylesheet" type="text/css" href="Folha_Estilo.css" media="screen" />
+
+
+
+		<style>
+
+		input,
+		textarea {
+			opacity: 0.5;
+			filter: alpha(opacity=50);
+			border:0.1px dashed;
+			background-color: #0070a1;
+		}
+
+		::-webkit-input-placeholder {
+		   color: lightgray;
+		   font: 1em verdana, arial, sans-serif;
+		}
+
+		:-moz-placeholder {
+		   color: lightgray;
+		   font: 1em verdana, arial, sans-serif;
+		}
+
+		</style>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+		<title>Sistematize</title>
+		</br></br>
+
+				<script>
+					var windowHeight = window.innerHeight;
+					document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
+					//alert(windowHeight);
+				</script>
+		
+		
+		
+		<div id="div_pagar"></div>
+		
+		
+		
+<!-- Validação do forumlário -->
+<script type="text/javascript">
+			var xmlHttp;
+			var str;
+
+			function createXMLHttpRequest() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_pagar() {
+			createXMLHttpRequest();
+			xmlHttp.onreadystatechange = handleStateChange;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_pagar.php", true);
+			
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&versao_app="+versao_app);
+			
+			document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			}
+
+			
+			function handleStateChange() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				str = xmlHttp.responseText.trim();
+				
+				document.getElementById("div_pagar").innerHTML = document.getElementById("div_pagar").innerHTML + str;
+				
+				document.getElementById("img_carregando_produtos").style.visibility = "hidden";
+				
+			}
+			}
+			}
+			
+		
+			
+		startRequest_pagar();
+			
+</script>   
+
+
+
+
+			
+		<div id="menu">
+
+		</div>	
+			
+		<script> 
+			$(function(){
+			  $("#menu").load("menu_fixo.html"); 
+			});
+		</script> 		
+				
+
+
+
+
+		 
+		 
+
+</body>
+
+</html>
