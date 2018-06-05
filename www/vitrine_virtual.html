@@ -352,7 +352,7 @@ function desaparecer_detalhes(e){
 			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
 			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&id_produto="+id_produto);
 			
-			document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
 			
 			
 			}
@@ -365,11 +365,10 @@ function desaparecer_detalhes(e){
 			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
 			
 				str = xmlHttp.responseText.trim();
+
+				document.getElementById("total_carrinho").innerHTML = 'Total: R$'+str;
 				
-				
-				document.getElementById("total_carrinho").innerHTML = 'Total: R$'.str;
-				
-				document.getElementById("img_carregando_produtos").style.visibility = "hidden";
+				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
 				
 			}
 			}
