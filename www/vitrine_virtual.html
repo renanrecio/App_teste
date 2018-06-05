@@ -324,6 +324,64 @@ function desaparecer_detalhes(e){
 
 
 <div id="div_vitrine"></div>
+
+	
+<!-- Validação do forumlário -->
+<script type="text/javascript">
+
+
+			function createXMLHttpRequest_inserir_no_carrinho() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_inserir_no_carrinho(id_produto) {
+			createXMLHttpRequest_inserir_no_carrinho();
+			xmlHttp.onreadystatechange = handleStateChange_inserir_no_carrinho;
+			
+			
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_inserir_no_carrinho.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&id_produto="+id_produto);
+			
+			document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			}
+
+			
+			function handleStateChange_inserir_no_carrinho() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				str = xmlHttp.responseText.trim();
+				
+				
+				document.getElementById("total_carrinho").innerHTML = 'Total: R$'.str;
+				
+				document.getElementById("img_carregando_produtos").style.visibility = "hidden";
+				
+			}
+			}
+			}
+			
+		
+			
+		startRequest_vitrine_virtual();
+			
+</script>   
+
+
 	
 <!--
 <a id="botao_voltar" style="text-decoration: none;" href="javascript:window.history.go(-1)"><span style="position:fixed; top:10%	; left:0%; font-size:2em; border:dashed gray; border-width: 0px 1px 0px 0px;">⇦</span></a>
