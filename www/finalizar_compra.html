@@ -120,6 +120,7 @@ body{
 				
 				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
 				
+				startRequest_calcular_valor_frete();
 			}
 			}
 			}
@@ -223,7 +224,7 @@ body{
 				
 				str = xmlHttp.responseText.trim();
 				
-				str = '10.00'; //teste, tirar depois
+				//str = '10.00'; //teste, tirar depois
 				
 				document.getElementById("valor_frete").innerHTML = document.getElementById("valor_frete").innerHTML + str;
 				
@@ -240,7 +241,7 @@ body{
 			}
 			}
 			
-		startRequest_calcular_valor_frete();
+		
 			
 </script>   
 
