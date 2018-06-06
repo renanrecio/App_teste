@@ -185,6 +185,7 @@ body{
 
 			var frete;
 			var valor_final;
+			var soma_valores_produtos;
 			
 			function createXMLHttpRequest_calcular_valor_frete() {
 			if (window.ActiveXObject) {
@@ -226,15 +227,21 @@ body{
 				
 				//str = '10.00'; //teste, tirar depois
 				
-				document.getElementById("valor_frete").innerHTML = str;
+				frete = Number(str).toFixed(2);
 				
-				frete = Number(str);
+				document.getElementById("valor_frete").innerHTML = frete;
+								
+				soma_valores_produtos = document.getElementById("valor_total_sem_frete").innerHTML;
 				
-				valor_final = Number(document.getElementById("valor_total_sem_frete").innerHTML) + frete;
+				soma_valores_produtos = Number(soma_valores_produtos).toFixed(2);
 				
-				document.getElementById("valor_total_com_frete").innerHTML = document.getElementById("valor_total_com_frete").innerHTML + ''+valor_final+'';
+				valor_final =  Number(soma_valores_produtos) + Number(frete);
 				
-				document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML = document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML + ''+valor_final+'';
+				valor_final = Number(valor_final).toFixed(2);
+				
+				document.getElementById("valor_total_com_frete").innerHTML = document.getElementById("valor_total_com_frete").innerHTML + valor_final;
+				
+				document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML = document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML + valor_final;
 				
 				
 			}
