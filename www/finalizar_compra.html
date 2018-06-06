@@ -93,16 +93,16 @@ body{
 			xmlHttp.onreadystatechange = handleStateChange;
 			
 		
-			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/resumo_compra.php", true);
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_resumo_compra.php", true);
 			
 			
 			
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&versao_app="+versao_app);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario);
 			
-			document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
 			
 			
 			}
@@ -118,7 +118,7 @@ body{
 				
 				document.getElementById("div_resumo_compra").innerHTML = document.getElementById("div_resumo_compra").innerHTML + str;
 				
-				document.getElementById("img_carregando_produtos").style.visibility = "hidden";
+				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
 				
 			}
 			}
@@ -126,7 +126,7 @@ body{
 			
 		
 			
-		//startRequest_resumo_compra();
+		startRequest_resumo_compra();
 			
 </script>   
 
