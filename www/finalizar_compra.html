@@ -180,6 +180,71 @@ body{
 </script>   
 
 
+<script type="text/javascript">
+
+			var frete;
+			var valor_final;
+			
+			function createXMLHttpRequest_calcular_valor_frete() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_calcular_valor_frete() {
+			createXMLHttpRequest_calcular_valor_frete();
+			xmlHttp.onreadystatechange = handleStateChange_calcular_valor_frete;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_calcular_valor_frete.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			
+			}
+
+			
+			function handleStateChange_calcular_valor_frete() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				str = xmlHttp.responseText.trim();
+				
+				str = '10.00'; //teste, tirar depois
+				
+				document.getElementById("valor_frete").innerHTML = document.getElementById("valor_frete").innerHTML + str;
+				
+				frete = Number(str);
+				
+				valor_final = Number(document.getElementById("valor_total_sem_frete").innerHTML) + frete;
+				
+				document.getElementById("valor_total_com_frete").innerHTML = document.getElementById("valor_total_com_frete").innerHTML + ''+valor_final+'';
+				
+				document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML = document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML + ''+valor_final+'';
+				
+				
+			}
+			}
+			}
+			
+		startRequest_calcular_valor_frete();
+			
+</script>   
+
+
 
 			
 		<div id="menu">
