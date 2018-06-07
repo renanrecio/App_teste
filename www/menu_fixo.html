@@ -35,7 +35,7 @@ if(localStorage.id_usuario == ""){
 <!--<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 3%; top:0.1em; width:2.8em; "/></a></div>
 -->
 
-<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 8%; top:0.1em; width:2.8em; "/><img id ="shop" src="fotos/shop.png" style="position: fixed; right: 3%; top:0.1em; width:2.8em; "/></a></div>
+<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 8%; top:0.1em; width:2.8em; "/></a><a id="shop_link" href="finalizar_compra.html" style="text-decoration: none;"><img id ="shop" src="fotos/shop.png" style="position: fixed; right: 3%; top:0.1em; width:2.8em; "/></a></div>
 
 	
 <!---
@@ -104,6 +104,10 @@ if( localStorage.tipo_login == 'lojista'){
 	document.getElementById('menu_pessoal').src = 'fotos/engrenagem.png';
 	
 	document.getElementById('shop').setAttribute('src','fotos/bag.png');
+	document.getElementById('shop_link').setAttribute('href','vendas_feitas.html');
+	
+	
+	
 	
 }else{
 	
@@ -112,6 +116,7 @@ if( localStorage.tipo_login == 'lojista'){
 	document.getElementById('cupom_link').setAttribute('href','historico_usuario.html');
 	
 	document.getElementById('shop').setAttribute('src','fotos/shop.png');
+	document.getElementById('shop_link').setAttribute('href','finalizar_compra.html');
 
 }//fim do else
 
