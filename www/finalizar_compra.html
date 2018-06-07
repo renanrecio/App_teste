@@ -441,7 +441,18 @@ function verificar_vazio(){
 				if(atualizar_e_pagar == 1){
 					window.location.href="pagar.html";
 				}else{
-					window.location.href="finalizar_compra.html";
+				
+					if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
+					
+						alert('Seu carrinho está vazio');
+						window.location.href="vitrine_virtual.html";
+						
+					}else{
+					
+						window.location.href="finalizar_compra.html";
+						
+					}//fim do else
+					
 				}//fim do else
 				
 		
