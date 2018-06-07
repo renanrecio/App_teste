@@ -115,7 +115,7 @@ body{
 <script type="text/javascript">
 
 
-			function createXMLHttpRequest_remover_produto_carrinho() {
+			function createXMLHttpRequest_cancelar_produto() {
 			if (window.ActiveXObject) {
 			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
 			}
@@ -124,12 +124,12 @@ body{
 			}
 			}
 
-			function startRequest_remover_produto_carrinho(id_venda) {
-			createXMLHttpRequest_remover_produto_carrinho();
-			xmlHttp.onreadystatechange = handleStateChange_remover_produto_carrinho;
+			function startRequest_cancelar_produto(id_venda) {
+			createXMLHttpRequest_cancelar_produto();
+			xmlHttp.onreadystatechange = handleStateChange_cancelar_produto;
 			
 		
-			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_remover_produto_do_carrinho.php", true);
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_cancelar_produto.php", true);
 			
 			
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -144,7 +144,7 @@ body{
 			}
 
 			
-			function handleStateChange_remover_produto_carrinho() {
+			function handleStateChange_cancelar_produto() {
 			if(xmlHttp.readyState == 4) {
 			if(xmlHttp.status == 200) {
 			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
