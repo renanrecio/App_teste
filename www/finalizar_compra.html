@@ -108,6 +108,70 @@ body{
 			
 </script>   
 
+
+
+<script type="text/javascript">
+
+		
+			
+	//Verifica se o cpf já existe no BD 
+			
+			function createXMLHttpRequest_editar_cpf() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_editar_cpf(cpf_antigo) {
+			createXMLHttpRequest_editar_cpf();
+			xmlHttp.onreadystatechange = handleStateChange_editar_cpf;
+			
+			//xmlHttp.open("GET", "https://acheloja.com/validar/editar_email.php?email="+document.getElementById("email").value+"&email_antigo="+localStorage.email_usuario, true);
+			
+			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/editar_cpf.php?id_loja="+id_loja+"&cpf="+document.getElementById("cpf").value+"&cpf_antigo="+cpf_antigo, true);
+					
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+		
+			}
+
+			
+			function handleStateChange_editar_cpf() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+	
+				if(xmlHttp.responseText.trim() == "1"){
+					
+					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_ja_cadastrado']; ?>";
+					alert("CPF já cadastrado, verifique se já possui cadastro no App!")
+					document.getElementById("cpf").focus();
+					return false;
+					
+				}else{
+					
+					//alert("não achou nada!")
+					
+				}
+				
+						
+				
+				
+			}
+			}
+			}
+			
+
+</script>		
+
+
 <script type="text/javascript">
 
 
@@ -242,9 +306,145 @@ body{
 			});
 		</script> 		
 				
+	<script>
+
+	function submeter(){
+		
+		if (verificar_vazio() == false) return false;
+		
+		var resp = confirm("Tem certeza que deseja salvar as alterações?")
+			if (resp){
+				document.getElementById("img_carregando").style.visibility = "visible";
+				document.getElementById("atualizar").value= "1";
+				
+				startRequest_update();
+			}
+	}
+	</script>
+	
+	
+<script>
+
+function verificar_vazio(){
+	var conteudo;
+	
+
+	conteudo = document.getElementById("cep").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo CEP");
+		document.getElementById("cep").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("endereco").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo Endereço");
+		document.getElementById("endereco").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("bairro").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo Bairro");
+		document.getElementById("bairro").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("cidade").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo Cidade");
+		document.getElementById("cidade").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("estado").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo Estado");
+		document.getElementById("estado").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("cpf").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo CPF");
+		document.getElementById("cpf").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("telefone").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo telefone");
+		document.getElementById("telefone").focus();
+		return false;
+		
+	}
+}
 
 
+</script>
 
+
+	
+<script type="text/javascript">			
+	//Atualizar informações pessoais no BD 
+			
+			function createXMLHttpRequest_update() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_update() {
+			createXMLHttpRequest_update();
+			xmlHttp.onreadystatechange = handleStateChange_update;
+			
+			//xmlHttp.open("POST", "https://acheloja.com/m/ajax_pessoal_app.php", true);
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_alterar_endereco_entrega.php", true);
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&atualizar=1");
+			
+			
+			
+		
+			}
+
+			
+			function handleStateChange_update() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			
+			var str = xmlHttp.responseText.trim();
+			
+				
+				window.location.href="finalizar_compra.html";
+		
+				
+			}
+			}
+			}
+			
+	
+</script>   
 
 		 
 		 
