@@ -74,8 +74,8 @@ if(localStorage.id_usuario == ""){
 			<a href="vitrine_virtual.html"><img id="menu_home" src="fotos/home.png" width="100%" style=" position:relative; top:-0.2em;  width:2.5em; " /><span id="n_produtos_novos" style="position:relative; font-size:12px; text-weight:bold; top:-5px; left:-5px; color:white;"></span></a>
 		</td>
 		<td style="text-align:center; width:20%;">
-			<!--<a href="historico_usuario.html" id="cupom_link"><img id="menu_cupons" src="fotos/meuscupons.png" width="100%"  style=" position:relative; top:-0.2em; width:2.5em; " /> </a>-->
-			<a href="historico_usuario.html" id="cupom_link"><img id="menu_cupons" src="fotos/book.png" width="100%"  style=" position:relative; top:-0.2em; width:2em; " /> </a>
+			<!--<a href="historico_usuario.html" id="historico_link"><img id="historico" src="fotos/meuscupons.png" width="100%"  style=" position:relative; top:-0.2em; width:2.5em; " /> </a>-->
+			<a href="historico_usuario.html" id="historico_link"><img id="historico" src="fotos/book.png" width="100%"  style=" position:relative; top:-0.2em; width:2em; " /> </a>
 		</td>
 		<td style="text-align:center; width:20%;">
 			<a href="chat.html" id="chat_link" ><img id="menu_chat" src="fotos/mensagens.png" width="100%"  style=" position:relative; top:-0.2em;  width:2.5em; " /><span id="novas_mensagens" style="position:relative; font-size:12px; text-weight:bold; top:-5px; left:-5px; color:white;"></span></a>
@@ -100,7 +100,7 @@ if( localStorage.tipo_login == 'lojista'){
 
 	document.getElementById('chat_link').setAttribute('href','lista_usuarios_do_lojista_chat.html');
 	document.getElementById('pessoal_link').setAttribute('href','pessoal_loja.html');
-	document.getElementById('cupom_link').setAttribute('href','vendas_feitas.html');
+	document.getElementById('historico_link').setAttribute('href','historico_lojista.html');
 	document.getElementById('menu_pessoal').src = 'fotos/engrenagem.png';
 	
 	document.getElementById('shop').setAttribute('src','fotos/bag.png');
@@ -113,7 +113,7 @@ if( localStorage.tipo_login == 'lojista'){
 	
 	document.getElementById('chat_link').setAttribute('href','chat.html');
 	document.getElementById('pessoal_link').setAttribute('href','pessoal.html');
-	document.getElementById('cupom_link').setAttribute('href','historico_usuario.html');
+	document.getElementById('historico_link').setAttribute('href','historico_usuario.html');
 	
 	document.getElementById('shop').setAttribute('src','fotos/shop.png');
 	document.getElementById('shop_link').setAttribute('href','finalizar_compra.html');
