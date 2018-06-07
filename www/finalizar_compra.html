@@ -453,6 +453,123 @@ function verificar_vazio(){
 	
 </script>   
 
+
+
+<script type="text/javascript">
+
+			var url;
+			var obj;
+
+			function createXMLHttpRequest_cep() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_cep() {
+			createXMLHttpRequest_cep();
+			xmlHttp.onreadystatechange = handleStateChange_cep;
+			
+			
+			xmlHttp.open("GET", "http://cep.republicavirtual.com.br/web_cep.php?formato=json&cep="+document.getElementById("cep").value, true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+			
+			}
+
+			
+			function handleStateChange_cep() {
+					if(xmlHttp.readyState == 4) {
+								if(xmlHttp.status == 200) {
+									
+									obj = JSON.parse(xmlHttp.responseText);
+									
+									if(obj.resultado == 1){
+										
+											document.getElementById("estado").value = obj.uf;
+											
+											document.getElementById("cidade").value = obj.cidade;
+											
+											document.getElementById("bairro").value = obj.bairro;
+											
+											//document.getElementById("cep_aviso").innerHTML = "";
+									
+									}else{
+										
+										//document.getElementById("cep_aviso").innerHTML = obj.message;
+										document.getElementById("estado").value = "";
+										document.getElementById("cidade").value = "";
+										document.getElementById("bairro").value = "";
+										
+										
+									}
+									
+									
+								}else{
+									
+										startRequest_cep2();
+										//alert("deu problema no status");
+								}
+					}
+			}
+			
+			//
+			
+			function startRequest_cep2() {
+			createXMLHttpRequest_cep();
+			xmlHttp.onreadystatechange = handleStateChangeV2;
+			
+			
+			xmlHttp.open("GET", "http://apps.widenet.com.br/busca-cep/api/cep.json?code="+document.getElementById("cep").value, true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+			}
+
+			
+			function handleStateChangeV2() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+				
+				obj = JSON.parse(xmlHttp.responseText.trim());
+				
+				if(obj.status == 1){
+					
+						document.getElementById("estado").value = obj.state;
+						
+						document.getElementById("cidade").value = obj.city;
+						
+						document.getElementById("bairro").value = obj.district;
+						
+						//document.getElementById("cep_aviso").innerHTML = "";
+				
+				}else{
+					
+					//document.getElementById("cep_aviso").innerHTML = obj.message;
+					document.getElementById("estado").value = "";
+					document.getElementById("cidade").value = "";
+					document.getElementById("bairro").value = "";
+					
+					
+				}
+				
+				
+			}
+			}
+			}
+</script>
 		 
 		 
 
