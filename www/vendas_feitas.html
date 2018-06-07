@@ -1,0 +1,420 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<script src="config_loja.js"></script>
+
+
+ <link rel="stylesheet" href="lib/font-awesome-4.5.0/css/font-awesome.min.css" />
+
+  <title>Sistematize</title>
+  
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+
+<style>
+p, input, span,a,li,placeholder,select,option,td,tr{
+	font-family: 'Montserrat', sans-serif;
+}
+
+body{
+	
+	background-color: #F9F9F9;
+}
+</style>
+</head>
+
+ <body>
+			  
+		<link rel="stylesheet" type="text/css" href="Folha_Estilo.css" media="screen" />
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+		<title>Sistematize</title>
+		</br></br>
+
+				<script>
+					var windowHeight = window.innerHeight;
+					document.getElementsByTagName('body')[0].style.height = windowHeight + "px";
+					//alert(windowHeight);
+				</script>
+		
+		
+		
+		<div id="div_vendas_feitas"></div>
+		
+     <!--  <a href="pagar.html"><input type="button" style="font-family: Montserrat;  position:fixed; font-size: 1em; height:2em; bottom:3.5em; width:90%; left:5%; background-color:#70913e; border:0; border-radius:25px; color:white;  font-weight: bold;" value="Pagar" /></a>
+		-->
+		
+		<img id="img_carregando_produtos" src="fotos/carregando_produtos.gif" style="border-radius:5px; visibility: hidden; width:40%; position: fixed; left:30%; bottom:5em;" />
+		
+		
+
+<script type="text/javascript">
+			var xmlHttp;
+			var str;	
+
+			function createXMLHttpRequest() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_vendas_feitas() {
+			createXMLHttpRequest();
+			xmlHttp.onreadystatechange = handleStateChange;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_vendas_feitas.php", true);
+			
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			}
+
+			
+			function handleStateChange() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				str = xmlHttp.responseText.trim();
+				
+				document.getElementById("div_vendas_feitas").innerHTML = document.getElementById("div_vendas_feitas").innerHTML + str;
+				
+				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
+				
+				
+			}
+			}
+			}
+			
+		
+			
+		startRequest_vendas_feitas();
+			
+</script>   
+
+
+
+
+
+<script type="text/javascript">
+
+
+			function createXMLHttpRequest_cancelar_produto_pelo_lojista() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_cancelar_produto_pelo_lojista(id_venda) {
+			createXMLHttpRequest_cancelar_produto_pelo_lojista();
+			xmlHttp.onreadystatechange = handleStateChange_cancelar_produto_pelo_lojista;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_cancelar_produto_pelo_lojista.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_venda="+id_venda);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			
+			}
+
+			
+			function handleStateChange_cancelar_produto_pelo_lojista() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				location.reload();
+				
+			}
+			}
+			}
+			
+		
+			
+</script>   
+
+
+
+<script type="text/javascript">
+
+
+			function createXMLHttpRequest_mudar_status_para_enviado() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_mudar_status_para_enviado(id_venda) {
+			createXMLHttpRequest_mudar_status_para_enviado();
+			xmlHttp.onreadystatechange = handleStateChange_mudar_status_para_enviado;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_mudar_status_para_enviado.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_venda="+id_venda);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			
+			}
+
+			
+			function handleStateChange_mudar_status_para_enviado() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				location.reload();
+				
+			}
+			}
+			}
+			
+		
+			
+</script>   
+
+
+
+			
+		<div id="menu">
+
+		</div>	
+			
+		<script> 
+			$(function(){
+			  $("#menu").load("menu_fixo.html"); 
+			});
+		</script> 		
+				
+
+
+
+
+	
+<script type="text/javascript">			
+	//Atualizar informações pessoais no BD 
+			
+			function createXMLHttpRequest_update() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_update() {
+			createXMLHttpRequest_update();
+			xmlHttp.onreadystatechange = handleStateChange_update;
+			
+			//xmlHttp.open("POST", "https://acheloja.com/m/ajax_pessoal_app.php", true);
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_alterar_endereco_entrega.php", true);
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&atualizar=1");
+			
+			
+		
+			}
+
+			
+			function handleStateChange_update() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			
+			var str = xmlHttp.responseText.trim();
+			
+				if(atualizar_e_pagar == 1){
+					
+					if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
+					
+						alert('Seu carrinho está vazio!');
+						window.location.href="vitrine_virtual.html";
+						
+					}else{
+					
+						window.location.href="pagar.html";
+						
+					}//fim do else
+					
+				}else{
+				
+					window.location.href="finalizar_compra.html";
+					
+					
+				}//fim do else
+				
+		
+				
+			}
+			}
+			}
+			
+	
+</script>   
+
+
+
+<script type="text/javascript">
+
+			var url;
+			var obj;
+
+			function createXMLHttpRequest_cep() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_cep() {
+			createXMLHttpRequest_cep();
+			xmlHttp.onreadystatechange = handleStateChange_cep;
+			
+			
+			xmlHttp.open("GET", "http://cep.republicavirtual.com.br/web_cep.php?formato=json&cep="+document.getElementById("cep").value, true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+			
+			}
+
+			
+			function handleStateChange_cep() {
+					if(xmlHttp.readyState == 4) {
+								if(xmlHttp.status == 200) {
+									
+									obj = JSON.parse(xmlHttp.responseText);
+									
+									if(obj.resultado == 1){
+										
+											document.getElementById("estado").value = obj.uf;
+											
+											document.getElementById("cidade").value = obj.cidade;
+											
+											document.getElementById("bairro").value = obj.bairro;
+											
+											//document.getElementById("cep_aviso").innerHTML = "";
+									
+									}else{
+										
+										//document.getElementById("cep_aviso").innerHTML = obj.message;
+										document.getElementById("estado").value = "";
+										document.getElementById("cidade").value = "";
+										document.getElementById("bairro").value = "";
+										
+										
+									}
+									
+									
+								}else{
+									
+										startRequest_cep2();
+										//alert("deu problema no status");
+								}
+					}
+			}
+			
+			//
+			
+			function startRequest_cep2() {
+			createXMLHttpRequest_cep();
+			xmlHttp.onreadystatechange = handleStateChangeV2;
+			
+			
+			xmlHttp.open("GET", "http://apps.widenet.com.br/busca-cep/api/cep.json?code="+document.getElementById("cep").value, true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+			}
+
+			
+			function handleStateChangeV2() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+				
+				obj = JSON.parse(xmlHttp.responseText.trim());
+				
+				if(obj.status == 1){
+					
+						document.getElementById("estado").value = obj.state;
+						
+						document.getElementById("cidade").value = obj.city;
+						
+						document.getElementById("bairro").value = obj.district;
+						
+						//document.getElementById("cep_aviso").innerHTML = "";
+				
+				}else{
+					
+					//document.getElementById("cep_aviso").innerHTML = obj.message;
+					document.getElementById("estado").value = "";
+					document.getElementById("cidade").value = "";
+					document.getElementById("bairro").value = "";
+					
+					
+				}
+				
+				
+			}
+			}
+			}
+</script>
+		 
+		 
+
+</body>
+
+</html>
