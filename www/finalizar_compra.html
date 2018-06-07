@@ -308,7 +308,9 @@ body{
 				
 	<script>
 
-	function submeter(){
+	var atualizar_e_pagar = 0;
+	
+	function submeter(pagar){
 		
 		if (verificar_vazio() == false) return false;
 		
@@ -316,6 +318,8 @@ body{
 			if (resp){
 				document.getElementById("img_carregando").style.visibility = "visible";
 				document.getElementById("atualizar").value= "1";
+				
+				if(pagar == 'pagar') atualizar_e_pagar = 1;
 				
 				startRequest_update();
 			}
@@ -424,7 +428,6 @@ function verificar_vazio(){
 			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&atualizar=1");
 			
 			
-			
 		
 			}
 
@@ -435,8 +438,12 @@ function verificar_vazio(){
 			
 			var str = xmlHttp.responseText.trim();
 			
+				if(atualizar_e_pagar == 1){
+					window.location.href="pagar.html";
+				}else{
+					window.location.href="finalizar_compra.html";
+				}//fim do else
 				
-				window.location.href="finalizar_compra.html";
 		
 				
 			}
