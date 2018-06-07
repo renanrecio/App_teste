@@ -408,8 +408,7 @@ function submeter(){
 			createXMLHttpRequest3();
 			xmlHttp.onreadystatechange = handleStateChange3;
 			
-			xmlHttp.open("GET", "https://acheloja.com/validar/cpf.php?cpf="+document.getElementById("cpf").value, true);
-			
+			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/cpf.php?cpf="+document.getElementById("cpf").value, true);
 			
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
@@ -808,6 +807,68 @@ function submeter(){
 			}
 			
 
+</script>	
+
+<script type="text/javascript">
+
+		
+			
+	//Verifica se o email já existe no BD 
+			
+			function createXMLHttpRequest_editar_cpf() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_editar_cpf(cpf_antigo) {
+			createXMLHttpRequest_editar_cpf();
+			xmlHttp.onreadystatechange = handleStateChange_editar_cpf;
+			
+			//xmlHttp.open("GET", "https://acheloja.com/validar/editar_email.php?email="+document.getElementById("email").value+"&email_antigo="+localStorage.email_usuario, true);
+			
+			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/editar_email.php?id_loja="+id_loja+"&cpf="+document.getElementById("cpf").value+"&cpf_antigo="+cpf_antigo, true);
+			
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+		
+			}
+
+			
+			function handleStateChange_editar_cpf() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			
+				if(xmlHttp.responseText.trim() == "1"){
+					
+					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_ja_cadastrado']; ?>";
+					alert("CPF já cadastrado, verifique se já possui cadastro no App!")
+					document.getElementById("cpf").focus();
+					return false;
+					
+				}else{
+					
+					//alert("não achou nada!")
+					
+				}
+				
+						
+				
+				
+			}
+			}
+			}
+			
+
 </script>		
 
 		
@@ -834,7 +895,7 @@ function submeter(){
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&email="+document.getElementById("email").value+"&nome="+document.getElementById("nome").value+"&senha="+document.getElementById("senha").value+"&telefone_comercial="+document.getElementById("telefone_comercial").value+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&cidade="+document.getElementById("cidade").value+"&bairro="+document.getElementById("bairro").value+"&estado="+document.getElementById("estado").value+"&atualizar=1");
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&email="+document.getElementById("email").value+"&nome="+document.getElementById("nome").value+"&senha="+document.getElementById("senha").value+"&telefone_comercial="+document.getElementById("telefone_comercial").value+"&cpf="+document.getElementById("cpf").value+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&cidade="+document.getElementById("cidade").value+"&bairro="+document.getElementById("bairro").value+"&estado="+document.getElementById("estado").value+"&atualizar=1");
 			
 			
 			
