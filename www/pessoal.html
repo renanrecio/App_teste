@@ -393,7 +393,7 @@ function submeter(){
 			 
 			 
 			//Verifica se o CPF já existe no BD  (Não estamos usando essa função pois não é necessário cpf para o usuario fazer o cadastro)
-			 
+			/* 
 			function createXMLHttpRequest3() {
 			if (window.ActiveXObject) {
 			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
@@ -445,7 +445,7 @@ function submeter(){
 			}
 			}
 			}
-			
+			*/
 			
 
 			function txtBoxFormat(strField, sMask, evtKeyPress) {
@@ -831,9 +831,8 @@ function submeter(){
 			
 			//xmlHttp.open("GET", "https://acheloja.com/validar/editar_email.php?email="+document.getElementById("email").value+"&email_antigo="+localStorage.email_usuario, true);
 			
-			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/editar_email.php?id_loja="+id_loja+"&cpf="+document.getElementById("cpf").value+"&cpf_antigo="+cpf_antigo, true);
-			
-			
+			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/editar_cpf.php?id_loja="+id_loja+"&cpf="+document.getElementById("cpf").value+"&cpf_antigo="+cpf_antigo, true);
+					
 			
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
@@ -847,7 +846,7 @@ function submeter(){
 			function handleStateChange_editar_cpf() {
 			if(xmlHttp.readyState == 4) {
 			if(xmlHttp.status == 200) {
-			
+	
 				if(xmlHttp.responseText.trim() == "1"){
 					
 					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_ja_cadastrado']; ?>";
