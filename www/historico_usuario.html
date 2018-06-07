@@ -43,7 +43,7 @@ body{
 		
 		
 		
-		<div id="div_resumo_compra"></div>
+		<div id="div_historico_usuario"></div>
 		
      <!--  <a href="pagar.html"><input type="button" style="font-family: Montserrat;  position:fixed; font-size: 1em; height:2em; bottom:3.5em; width:90%; left:5%; background-color:#70913e; border:0; border-radius:25px; color:white;  font-weight: bold;" value="Pagar" /></a>
 		-->
@@ -54,7 +54,7 @@ body{
 
 <script type="text/javascript">
 			var xmlHttp;
-			var str;
+			var str;	
 
 			function createXMLHttpRequest() {
 			if (window.ActiveXObject) {
@@ -65,12 +65,12 @@ body{
 			}
 			}
 
-			function startRequest_resumo_compra() {
+			function startRequest_historico_usuario() {
 			createXMLHttpRequest();
 			xmlHttp.onreadystatechange = handleStateChange;
 			
 		
-			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_resumo_compra.php", true);
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_historico_usuario.php", true);
 			
 			
 			
@@ -93,83 +93,23 @@ body{
 			
 				str = xmlHttp.responseText.trim();
 				
-				document.getElementById("div_resumo_compra").innerHTML = document.getElementById("div_resumo_compra").innerHTML + str;
+				document.getElementById("div_historico_usuario").innerHTML = document.getElementById("div_historico_usuario").innerHTML + str;
 				
 				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
 				
-				startRequest_calcular_valor_frete();
+				
 			}
 			}
 			}
 			
 		
 			
-		startRequest_resumo_compra();
+		startRequest_historico_usuario();
 			
 </script>   
 
 
 
-<script type="text/javascript">
-
-		
-			
-	//Verifica se o cpf já existe no BD 
-			
-			function createXMLHttpRequest_editar_cpf() {
-			if (window.ActiveXObject) {
-			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			else if (window.XMLHttpRequest) {
-			xmlHttp = new XMLHttpRequest();
-			}
-			}
-			
-			
-			function startRequest_editar_cpf(cpf_antigo) {
-			createXMLHttpRequest_editar_cpf();
-			xmlHttp.onreadystatechange = handleStateChange_editar_cpf;
-			
-			//xmlHttp.open("GET", "https://acheloja.com/validar/editar_email.php?email="+document.getElementById("email").value+"&email_antigo="+localStorage.email_usuario, true);
-			
-			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/validar/editar_cpf.php?id_loja="+id_loja+"&cpf="+document.getElementById("cpf").value+"&cpf_antigo="+cpf_antigo, true);
-					
-			
-			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			
-			xmlHttp.send();
-			
-			
-		
-			}
-
-			
-			function handleStateChange_editar_cpf() {
-			if(xmlHttp.readyState == 4) {
-			if(xmlHttp.status == 200) {
-	
-				if(xmlHttp.responseText.trim() == "1"){
-					
-					//document.getElementById("email_aviso").innerHTML = "<?php echo $traducao['email_ja_cadastrado']; ?>";
-					alert("CPF já cadastrado, verifique se já possui cadastro no App!")
-					document.getElementById("cpf").focus();
-					return false;
-					
-				}else{
-					
-					//alert("não achou nada!")
-					
-				}
-				
-						
-				
-				
-			}
-			}
-			}
-			
-
-</script>		
 
 
 <script type="text/javascript">
@@ -222,78 +162,6 @@ body{
 </script>   
 
 
-<script type="text/javascript">
-
-			var frete;
-			var valor_final;
-			var soma_valores_produtos;
-			
-			function createXMLHttpRequest_calcular_valor_frete() {
-			if (window.ActiveXObject) {
-			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			else if (window.XMLHttpRequest) {
-			xmlHttp = new XMLHttpRequest();
-			}
-			}
-
-			function startRequest_calcular_valor_frete() {
-			createXMLHttpRequest_calcular_valor_frete();
-			xmlHttp.onreadystatechange = handleStateChange_calcular_valor_frete;
-			
-		
-			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_calcular_valor_frete.php", true);
-			
-			
-			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			
-			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario);
-			
-			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
-			
-			
-			
-			}
-
-			
-			function handleStateChange_calcular_valor_frete() {
-			if(xmlHttp.readyState == 4) {
-			if(xmlHttp.status == 200) {
-			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
-			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
-			
-				
-				str = xmlHttp.responseText.trim();
-				
-				//str = '10.00'; //teste, tirar depois
-				
-				frete = Number(str).toFixed(2);
-				
-				document.getElementById("valor_frete").innerHTML = frete;
-								
-				soma_valores_produtos = document.getElementById("valor_total_sem_frete").innerHTML;
-				
-				soma_valores_produtos = Number(soma_valores_produtos).toFixed(2);
-				
-				valor_final =  Number(soma_valores_produtos) + Number(frete);
-				
-				valor_final = Number(valor_final).toFixed(2);
-				
-				document.getElementById("valor_total_com_frete").innerHTML = document.getElementById("valor_total_com_frete").innerHTML + valor_final;
-				
-				document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML = document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML + valor_final;
-				
-				
-			}
-			}
-			}
-			
-		
-			
-</script>   
-
-
 
 			
 		<div id="menu">
@@ -306,99 +174,8 @@ body{
 			});
 		</script> 		
 				
-	<script>
-
-	var atualizar_e_pagar = 0;
-	
-	function submeter(pagar){
-		
-		if (verificar_vazio() == false) return false;
-		
-		var resp = confirm("Tem certeza que inseriu todas informações corretamente?")
-			if (resp){
-				document.getElementById("img_carregando").style.visibility = "visible";
-				document.getElementById("atualizar").value= "1";
-				
-				if(pagar == 'pagar') atualizar_e_pagar = 1;
-				
-				startRequest_update();
-			}
-	}
-	</script>
-	
-	
-<script>
-
-function verificar_vazio(){
-	var conteudo;
-	
-
-	conteudo = document.getElementById("cep").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo CEP");
-		document.getElementById("cep").focus();
-		return false;
-		
-	}
-	
-	conteudo = document.getElementById("endereco").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo Endereço");
-		document.getElementById("endereco").focus();
-		return false;
-		
-	}
-	
-	conteudo = document.getElementById("bairro").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo Bairro");
-		document.getElementById("bairro").focus();
-		return false;
-		
-	}
-	
-	conteudo = document.getElementById("cidade").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo Cidade");
-		document.getElementById("cidade").focus();
-		return false;
-		
-	}
-	
-	conteudo = document.getElementById("estado").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo Estado");
-		document.getElementById("estado").focus();
-		return false;
-		
-	}
-	
-	conteudo = document.getElementById("cpf").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo CPF");
-		document.getElementById("cpf").focus();
-		return false;
-		
-	}
-	
-	conteudo = document.getElementById("telefone").value;
-	if(conteudo == ""){
-		
-		alert("Preencha o campo telefone");
-		document.getElementById("telefone").focus();
-		return false;
-		
-	}
-}
 
 
-</script>
 
 
 	
