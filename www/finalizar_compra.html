@@ -439,9 +439,7 @@ function verificar_vazio(){
 			var str = xmlHttp.responseText.trim();
 			
 				if(atualizar_e_pagar == 1){
-					window.location.href="pagar.html";
-				}else{
-				
+					
 					if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
 					
 						alert('Seu carrinho está vazio');
@@ -449,9 +447,14 @@ function verificar_vazio(){
 						
 					}else{
 					
-						window.location.href="finalizar_compra.html";
+						
+						window.location.href="pagar.html";
 						
 					}//fim do else
+				}else{
+				
+					window.location.href="finalizar_compra.html";
+					
 					
 				}//fim do else
 				
