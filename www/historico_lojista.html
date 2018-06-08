@@ -362,6 +362,75 @@ body{
 			}
 </script>
 		 
+
+<script>
+	
+		
+
+		function createXMLHttpRequest_detalhes_historico() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest_detalhes_historico(id_loja,mes,ano) {
+			createXMLHttpRequest_detalhes_historico();
+			xmlHttp.onreadystatechange = handleStateChange_detalhes_historico;
+						
+			
+			xmlHttp.open("GET", "ajax_historico_lojista_detalhes.php?id_loja="+id_loja+"&mes="+mes+"&ano="+ano, true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+			
+		
+			}
+
+			
+			function handleStateChange_detalhes_historico() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+				
+				
+				if(xmlHttp.responseText.trim() != ""){
+					
+					document.getElementById('div_fundo_detalhes_historico').style.visibility = 'visible';
+					document.getElementById('div_detalhes_historico').style.visibility = 'visible';
+					document.getElementById('div_detalhes_historico').innerHTML = '';
+					$('#div_detalhes_historico').append( xmlHttp.responseText.trim() );
+					//alert(''+xmlHttp.responseText.trim()+'');
+				}else{
+					
+					alert("Ocorreu algum problema!")
+					
+				}
+				
+						
+				
+				
+			}
+			}
+			}
+	
+	
+</script>
+
+
+<!-- Ver cupom -->
+<div id="div_fundo_detalhes_historico" onclick="document.getElementById('div_fundo_detalhes_historico').style.visibility = 'hidden'; document.getElementById('div_detalhes_historico').style.visibility = 'hidden';" style="visibility: hidden; position: fixed; top:0em; width:100%; height:100%;">
+	<span onclick="document.getElementById('div_fundo_detalhes_historico').style.visibility = 'hidden'; document.getElementById('div_detalhes_historico').style.visibility = 'hidden';" style="position: absolute; top:2em; right:1em; font-weight:bold; font-size:1.5em; cursor:pointer; color: black;" >X</span>
+</div>	
+<div id="div_detalhes_historico" style="visibility:hidden;">
+</div>
+
 		 
 
 </body>
