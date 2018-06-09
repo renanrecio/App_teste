@@ -35,7 +35,7 @@ if(localStorage.id_usuario == ""){
 <!--<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 3%; top:0.1em; width:2.8em; "/></a></div>
 -->
 
-<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 12%; top:0.1em; width:2.8em; "/></a><a id="shop_link" href="finalizar_compra.html" style="text-decoration: none;"><img id ="shop" src="fotos/shop.png" style="position: fixed; right: 3%; top:0.5em; width:2em; "/></a></div>
+<div  style="width: 100%;" ><span id="nome_loja" style="font-family: Montserrat;  position: fixed; font-size: 1.2em; left: 3%; top:0.75em; color: white; font-weight: bold; "></span><a href="buscar_produtos.html" style="text-decoration: none;"><img id ="lupa" src="fotos/lupa.png" style="position: fixed; right: 12%; top:0.1em; width:2.8em; "/></a><a id="shop_link" href="finalizar_compra.html" style="text-decoration: none;"><img id ="shop" src="fotos/shop.png" style="position: fixed; right: 3%; top:0.5em; width:2em; "/><span id="vendas_pendentes_ou_carrinho" style="position:fixed; font-size:12px; text-weight:bold; right: 2%; top:2.8em; color:white;"></span></a></div>
 
 	
 <!---
@@ -300,12 +300,73 @@ document.getElementById("nome_usuario").innerHTML = nome_menu;
 						
 </script>
 
+<script type="text/javascript">
+//Carregar Lampada de novidades
+					
+					var xmlHttp3; 
+					
+					var str;
+					
+					function createXMLHttpRequest_numero_vendas_pendentes_ou_no_carrinho() {
+					if (window.ActiveXObject) {
+					xmlHttp3 = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					else if (window.XMLHttpRequest) {
+					xmlHttp3 = new XMLHttpRequest();
+					}
+					}
+
+					function startRequest_numero_vendas_pendentes_ou_no_carrinho() {
+					createXMLHttpRequest_numero_vendas_pendentes_ou_no_carrinho();
+					xmlHttp3.onreadystatechange = handleStateChange_numero_vendas_pendentes_ou_no_carrinho;
+					
+					//xmlHttp3.open("POST", "https://acheloja.com/m/ajax_novidades_usuario_app.php", true);
+					//xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novidades_usuario_app.php", true);
+						
+						xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_numero_de_vendas_pendentes_ou_carrinho.php", true);
+							
+						xmlHttp3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+						if( localStorage.tipo_login == 'lojista'){
+						
+							xmlHttp3.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&vendas_ou_carrinho=vendas");
+							
+						}else{
+						
+							xmlHttp3.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&vendas_ou_carrinho=carrinho");
+						
+						}//fim do elses
+					
+					}
+
+					
+					function handleStateChange_numero_vendas_pendentes_ou_no_carrinho() {
+					if(xmlHttp3.readyState == 4) {
+					if(xmlHttp3.status == 200) {
+					
+						str = xmlHttp3.responseText.trim();
+						
+						document.getElementById("vendas_pendentes_ou_carrinho").innerHTML = str;
+						
+						
+					}
+					}
+					}		
+
+					///Executar função para ver se tem novidades
+					startRequest_numero_vendas_pendentes_ou_no_carrinho();
+					
+						
+</script>	
+			
+
 				<script> 
 				
 						$(function(){
 						
 						  setInterval(function(){ 
 										startRequest_novas_msgs_chat();
+										startRequest_numero_vendas_pendentes_ou_no_carrinho();
 						  }, 2000);
 						  
 						});
@@ -792,8 +853,9 @@ function setupPush() {
 			
 			
 			
-</script> 	
-			
+</script> 
+
+
 	
 <div id="img_carregando" style=" position: fixed; visibility: hidden; top:0em; left:-1%; height:100%; width:102%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
 	 <center>
