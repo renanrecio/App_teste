@@ -45,12 +45,17 @@ body{
 		
 		<div id="div_historico_lojista"></div>
 		
+		
+		<span id="div_fechar_detalhes_historico" onclick="document.getElementById('div_fechar_detalhes_historico').style.visibility = 'hidden'; startRequest_historico_usuario(); " style="position: absolute; top:3em; right:1em; visibility: hidden; font-weight:bold; font-size:1.5em; cursor:pointer; color: black;" >X</span>
+			
+			
+		<!--
 		<div id="div_fundo_detalhes_historico" onclick="document.getElementById('div_fundo_detalhes_historico').style.visibility = 'hidden'; document.getElementById('div_detalhes_historico').style.visibility = 'hidden';" style="visibility: hidden; position: fixed; top:3em; width:100%; height:100%; background-color:white;">
 			<span onclick="document.getElementById('div_fundo_detalhes_historico').style.visibility = 'hidden'; document.getElementById('div_detalhes_historico').style.visibility = 'hidden';" style="position: absolute; top:1em; right:1em; font-weight:bold; font-size:1.5em; cursor:pointer; color: black;" >X</span>
 			<div id="div_detalhes_historico" style="visibility:hidden; position: absolute; top:2em; left:0em; width:100%;">
 			</div>
 		</div>	
-
+		-->
 		
      <!--  <a href="pagar.html"><input type="button" style="font-family: Montserrat;  position:fixed; font-size: 1em; height:2em; bottom:3.5em; width:90%; left:5%; background-color:#70913e; border:0; border-radius:25px; color:white;  font-weight: bold;" value="Pagar" /></a>
 		-->
@@ -101,7 +106,9 @@ body{
 			
 				str = xmlHttp.responseText.trim();
 				
-				document.getElementById("div_historico_lojista").innerHTML = document.getElementById("div_historico_lojista").innerHTML + str;
+				//document.getElementById("div_historico_lojista").innerHTML = document.getElementById("div_historico_lojista").innerHTML + str;
+				
+				document.getElementById("div_historico_lojista").innerHTML = str;
 				
 				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
 				
@@ -410,10 +417,11 @@ body{
 				
 				if(xmlHttp.responseText.trim() != ""){
 					
-					document.getElementById('div_fundo_detalhes_historico').style.visibility = 'visible';
-					document.getElementById('div_detalhes_historico').style.visibility = 'visible';
-					document.getElementById('div_detalhes_historico').innerHTML = '';
-					$('#div_detalhes_historico').append( xmlHttp.responseText.trim() );
+					//document.getElementById('div_fundo_detalhes_historico').style.visibility = 'visible';
+					document.getElementById('div_fechar_detalhes_historico').style.visibility = 'visible';
+					
+					document.getElementById('div_historico_lojista').innerHTML = '';
+					$('#div_historico_lojista').append( xmlHttp.responseText.trim() );
 					//alert(''+xmlHttp.responseText.trim()+'');
 				}else{
 					
