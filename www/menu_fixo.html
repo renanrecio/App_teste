@@ -303,34 +303,37 @@ document.getElementById("nome_usuario").innerHTML = nome_menu;
 <script type="text/javascript">
 //Carregar Lampada de novidades
 					
+					var xmlHttp4; 
+					
+					var str2;
 					
 					function createXMLHttpRequest_numero_vendas_pendentes_ou_no_carrinho() {
 					if (window.ActiveXObject) {
-					xmlHttp3 = new ActiveXObject("Microsoft.XMLHTTP");
+					xmlHttp4 = new ActiveXObject("Microsoft.XMLHTTP");
 					}
 					else if (window.XMLHttpRequest) {
-					xmlHttp3 = new XMLHttpRequest();
+					xmlHttp4 = new XMLHttpRequest();
 					}
 					}
 
 					function startRequest_numero_vendas_pendentes_ou_no_carrinho() {
 					createXMLHttpRequest_numero_vendas_pendentes_ou_no_carrinho();
-					xmlHttp3.onreadystatechange = handleStateChange_numero_vendas_pendentes_ou_no_carrinho;
+					xmlHttp4.onreadystatechange = handleStateChange_numero_vendas_pendentes_ou_no_carrinho;
 					
-					//xmlHttp3.open("POST", "https://acheloja.com/m/ajax_novidades_usuario_app.php", true);
-					//xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novidades_usuario_app.php", true);
+					//xmlHttp4.open("POST", "https://acheloja.com/m/ajax_novidades_usuario_app.php", true);
+					//xmlHttp4.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_novidades_usuario_app.php", true);
 						
-						xmlHttp3.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_numero_de_vendas_pendentes_ou_carrinho.php", true);
+						xmlHttp4.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_numero_de_vendas_pendentes_ou_carrinho.php", true);
 							
-						xmlHttp3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+						xmlHttp4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					
 						if( localStorage.tipo_login == 'lojista'){
 						
-							xmlHttp3.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&vendas_ou_carrinho=vendas");
+							xmlHttp4.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&vendas_ou_carrinho=vendas");
 							
 						}else{
 						
-							xmlHttp3.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&vendas_ou_carrinho=carrinho");
+							xmlHttp4.send("id_usuario="+localStorage.id_usuario+"&id_loja="+id_loja+"&vendas_ou_carrinho=carrinho");
 						
 						}//fim do elses
 					
@@ -338,12 +341,12 @@ document.getElementById("nome_usuario").innerHTML = nome_menu;
 
 					
 					function handleStateChange_numero_vendas_pendentes_ou_no_carrinho() {
-					if(xmlHttp3.readyState == 4) {
-					if(xmlHttp3.status == 200) {
+					if(xmlHttp4.readyState == 4) {
+					if(xmlHttp4.status == 200) {
 					
-						str = xmlHttp3.responseText.trim();
+						str2 = xmlHttp4.responseText.trim();
 						
-						document.getElementById("vendas_pendentes_ou_carrinho").innerHTML = str;
+						document.getElementById("vendas_pendentes_ou_carrinho").innerHTML = str2;
 						
 						
 					}
