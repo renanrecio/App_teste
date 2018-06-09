@@ -382,7 +382,7 @@ body{
 			xmlHttp.onreadystatechange = handleStateChange_detalhes_historico;
 						
 			
-			xmlHttp.open("GET", "ajax_historico_lojista_detalhes.php?id_loja="+id_loja+"&mes="+mes+"&ano="+ano, true);
+			xmlHttp.open("GET", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_historico_lojista_detalhes.php?id_loja="+id_loja+"&mes="+mes+"&ano="+ano, true);
 			
 			
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
