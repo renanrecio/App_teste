@@ -426,6 +426,8 @@ function desaparecer_buscar_produto(){
  
  </script>
  
+ 
+ 
  <div class="menu_superior"  ></div> 
 
  <div style="width: 100%;" ><form onsubmit="busca_produto()"><input type="text" id="nome_produto" name="nome_produto" value="" placeholder="Pesquisar produto ou serviço..."  style=" position:fixed; font-size:1em; top:0.325em; left:3%; height: 2em; width: 94%; border:none; "/></form> <img id ="lupa" onclick="busca_produto()" src="fotos/lupa_cor.png" style="position: fixed; right: 3%; top:0.1em; width:2.8em; "/></div>
@@ -472,6 +474,64 @@ $(function () {
 </script>
 
  <!--FIM dos Filtros -->
+ 
+ 
+<!-- Validação do forumlário -->
+<script type="text/javascript">
+
+
+			function createXMLHttpRequest_inserir_no_carrinho() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_inserir_no_carrinho(id_produto) {
+			createXMLHttpRequest_inserir_no_carrinho();
+			xmlHttp.onreadystatechange = handleStateChange_inserir_no_carrinho;
+			
+			
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_inserir_no_carrinho.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&id_produto="+id_produto);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			}
+
+			
+			function handleStateChange_inserir_no_carrinho() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				str = xmlHttp.responseText.trim();
+
+				document.getElementById("total_carrinho").innerHTML = 'Total: R$'+str;
+				
+				document.getElementById('div_carrinho').style.visibility='visible';
+				
+				startRequest_numero_vendas_pendentes_ou_no_carrinho();
+				
+				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
+				
+			}
+			}
+			}
+			
+		
+			
+			
+</script>   
  
  
 	
