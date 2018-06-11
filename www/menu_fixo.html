@@ -699,9 +699,9 @@ function setupPush() {
 		
      }else{
 		
-		if (link == 'meus_cupons') {
+		if (link == 'vendas_feitas') {
 		
-			window.location.href = "meus_cupons.html";	 
+			window.location.href = "vendas_feitas.html";	 
 		
 		}else{
 			
@@ -729,13 +729,27 @@ function setupPush() {
 									window.location.href = "aviso_geral.html";	
 					      
 								}else{
-								 /*  navigator.notification.alert(
-									   data.message,         // message
-									   null,                 // callback
-									   data.title,           // title
-									   'Ok'                  // buttonName
-								   );   
-								  */
+									 if (link == 'historico_lojista') {
+		
+										window.location.href = "historico_lojista.html";	
+							  
+									}else{
+										 if (link == 'historico_usuario') {
+		
+											window.location.href = "historico_usuario.html";	
+								  
+										}else{
+										 /*  navigator.notification.alert(
+											   data.message,         // message
+											   null,                 // callback
+											   data.title,           // title
+											   'Ok'                  // buttonName
+										   );   
+										  */
+										}//fim do else
+										
+									}//fim do else
+									
 								}//fim do else
 				  		}//fim do else  
 			    }//fim do else
