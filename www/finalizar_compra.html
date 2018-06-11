@@ -351,6 +351,24 @@ function verificar_vazio(){
 		
 	}
 	
+	conteudo = document.getElementById("numero").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo número");
+		document.getElementById("numero").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("complemento").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo Complemento");
+		document.getElementById("complemento").focus();
+		return false;
+		
+	}
+	
 	conteudo = document.getElementById("bairro").value;
 	if(conteudo == ""){
 		
@@ -425,7 +443,7 @@ function verificar_vazio(){
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&atualizar=1");
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&numero="+document.getElementById("numero").value+"&complemento="+document.getElementById("complemento").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&atualizar=1");
 			
 			
 		
@@ -514,6 +532,8 @@ function verificar_vazio(){
 											
 											document.getElementById("bairro").value = obj.bairro;
 											
+											document.getElementById("endereco").value = (obj.tipo_logradouro)+' '+(obj.logradouro);
+											
 											//document.getElementById("cep_aviso").innerHTML = "";
 									
 									}else{
@@ -522,7 +542,7 @@ function verificar_vazio(){
 										document.getElementById("estado").value = "";
 										document.getElementById("cidade").value = "";
 										document.getElementById("bairro").value = "";
-										
+										document.getElementById("endereco").value = "";
 										
 									}
 									
@@ -567,6 +587,8 @@ function verificar_vazio(){
 						
 						document.getElementById("bairro").value = obj.district;
 						
+						document.getElementById("endereco").value = obj.district;
+						
 						//document.getElementById("cep_aviso").innerHTML = "";
 				
 				}else{
@@ -575,6 +597,7 @@ function verificar_vazio(){
 					document.getElementById("estado").value = "";
 					document.getElementById("cidade").value = "";
 					document.getElementById("bairro").value = "";
+					document.getElementById("endereco").value = "";
 					
 					
 				}
