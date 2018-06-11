@@ -203,6 +203,10 @@ function submeter(){
 											
 											document.getElementById("bairro").value = obj.bairro;
 											
+											document.getElementById("endereco").value = (obj.tipo_logradouro)+' '+(obj.logradouro);
+											
+											
+											
 											//document.getElementById("cep_aviso").innerHTML = "";
 									
 									}else{
@@ -211,6 +215,7 @@ function submeter(){
 										document.getElementById("estado").value = "";
 										document.getElementById("cidade").value = "";
 										document.getElementById("bairro").value = "";
+										document.getElementById("endereco").value = "";
 										
 										
 									}
@@ -256,6 +261,13 @@ function submeter(){
 						
 						document.getElementById("bairro").value = obj.district;
 						
+						
+						
+						var pos_hifen = obj.address.indexOf("-");						
+						document.getElementById("endereco").value = obj.address.substring(0,pos_hifen);
+						
+						
+						
 						//document.getElementById("cep_aviso").innerHTML = "";
 				
 				}else{
@@ -264,6 +276,7 @@ function submeter(){
 					document.getElementById("estado").value = "";
 					document.getElementById("cidade").value = "";
 					document.getElementById("bairro").value = "";
+					document.getElementById("endereco").value = "";
 					
 					
 				}
@@ -894,7 +907,7 @@ function submeter(){
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&email="+document.getElementById("email").value+"&nome="+document.getElementById("nome").value+"&senha="+document.getElementById("senha").value+"&telefone_comercial="+document.getElementById("telefone_comercial").value+"&cpf="+document.getElementById("cpf").value+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&cidade="+document.getElementById("cidade").value+"&bairro="+document.getElementById("bairro").value+"&estado="+document.getElementById("estado").value+"&atualizar=1");
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&email="+document.getElementById("email").value+"&nome="+document.getElementById("nome").value+"&senha="+document.getElementById("senha").value+"&telefone_comercial="+document.getElementById("telefone_comercial").value+"&cpf="+document.getElementById("cpf").value+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&numero="+document.getElementById("numero").value+"&complemento="+document.getElementById("complemento").value+"&cidade="+document.getElementById("cidade").value+"&bairro="+document.getElementById("bairro").value+"&estado="+document.getElementById("estado").value+"&atualizar=1");
 			
 			
 			
