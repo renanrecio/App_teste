@@ -225,6 +225,7 @@ body{
 <script type="text/javascript">
 
 			var frete;
+			var prazo_entrega;
 			var valor_final;
 			var soma_valores_produtos;
 			
@@ -262,13 +263,30 @@ body{
 			if(xmlHttp.status == 200) {
 			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
 			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
-			
 				
 				str = xmlHttp.responseText.trim();
+						
+				var pos_p = str.indexOf("#p");
 				
 				//str = '10.00'; //teste, tirar depois
 				
-				frete = Number(str).toFixed(2);
+				//frete = Number(str).toFixed(2);
+				
+				prazo_entrega = Number(str.substring((pos_p+2), str.length));
+				
+				if(prazo_entrega > 1){
+					prazo_entrega = prazo_entrega+' dias úteis';
+				}else{
+					prazo_entrega = prazo_entrega+' dia útil';
+				}//fim do else
+				
+				document.getElementById("prazo_entrega").innerHTML = document.getElementById("prazo_entrega").innerHTML + prazo_entrega;
+				
+				////////////////
+				//Frete abaixo//
+				///////////////
+				
+				frete = Number(str.substring(0, pos_p)).toFixed(2);
 				
 				document.getElementById("valor_frete").innerHTML = frete;
 								
