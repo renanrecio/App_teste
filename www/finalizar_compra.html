@@ -415,6 +415,15 @@ function verificar_vazio(){
 		return false;
 		
 	}
+	
+	conteudo = document.getElementById("nome_cliente_compra").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo com seu Nome");
+		document.getElementById("nome_cliente_compra").focus();
+		return false;
+		
+	}
 }
 
 
@@ -445,7 +454,7 @@ function verificar_vazio(){
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&numero="+document.getElementById("numero").value+"&complemento="+document.getElementById("complemento").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&atualizar=1");
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&numero="+document.getElementById("numero").value+"&complemento="+document.getElementById("complemento").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&nome_cliente_compra="+document.getElementById("nome_cliente_compra").value+"&obs_compra="+document.getElementById("obs_compra").value+"&atualizar=1");
 			
 			
 		
