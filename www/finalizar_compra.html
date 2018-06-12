@@ -302,6 +302,7 @@ body{
 				
 				document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML = document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML + valor_final;
 				
+				document.getElementById("img_carregando").style.visibility = 'hidden';
 				
 			}
 			}
@@ -312,7 +313,11 @@ body{
 </script>   
 
 
-
+		 <div id="img_carregando" style=" position: fixed; visibility: visible; top:0em; height:100%; width:100%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
+			 <center>
+				<img  src="https://s3.amazonaws.com/figuras-acheloja-do-site/carregando_novo.gif" style="border-radius:25px; position: relative; top:12em;  height:7em; width:auto; " />
+			 </center>
+		 </div>
 			
 		<div id="menu">
 
@@ -637,6 +642,7 @@ function verificar_vazio(){
 			}
 </script>
 		 
+
 		 
 
 </body>
