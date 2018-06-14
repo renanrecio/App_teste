@@ -282,6 +282,8 @@ body{
 				
 				document.getElementById("prazo_entrega").innerHTML = document.getElementById("prazo_entrega").innerHTML + prazo_entrega;
 				
+				if(prazo_entrega == 0) document.getElementById("span_prazo_de_entrega").style.display = 'none';
+				
 				////////////////
 				//Frete abaixo//
 				///////////////
@@ -289,7 +291,14 @@ body{
 				frete = Number(str.substring(0, pos_p)).toFixed(2);
 				
 				document.getElementById("valor_frete").innerHTML = frete;
-								
+				
+				if(frete == 0) document.getElementById("span_frete").style.display = 'none';
+				
+						
+				////////////////
+				//Valor total //
+				///////////////
+				
 				soma_valores_produtos = document.getElementById("valor_total_sem_frete").innerHTML;
 				
 				soma_valores_produtos = Number(soma_valores_produtos).toFixed(2);
@@ -304,6 +313,9 @@ body{
 				
 				document.getElementById("botao_finalizar_pedido").setAttribute('onclick','submeter(\'pagar\');');
 				document.getElementById("botao_finalizar_pedido").setAttribute('value','Finalizar pedido');
+				
+				
+				
 				
 			}
 			}
@@ -325,7 +337,7 @@ body{
 				
 	<script>
 
-	var atualizar_e_pagar = 0;
+	var atualizar_e_pagar = 'nao';
 	
 	function submeter(pagar){
 		
@@ -336,7 +348,8 @@ body{
 				document.getElementById("img_carregando").style.visibility = "visible";
 				document.getElementById("atualizar").value= "1";
 				
-				if(pagar == 'pagar') atualizar_e_pagar = 1;
+				if(pagar == 'pagar') atualizar_e_pagar = 'sim';
+				
 				
 				startRequest_update();
 			}
@@ -441,6 +454,16 @@ function verificar_vazio(){
 		return false;
 		
 	}
+	
+	conteudo = document.getElementById("forma_de_pagamento").value;
+	if(conteudo == ""){
+		
+		alert("Escolha a forma de pagamento");
+		document.getElementById("forma_de_pagamento").focus();
+		return false;
+		
+	}
+	
 }
 
 
@@ -471,7 +494,7 @@ function verificar_vazio(){
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
 			
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&numero="+document.getElementById("numero").value+"&complemento="+document.getElementById("complemento").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&nome_cliente_compra="+document.getElementById("nome_cliente_compra").value+"&obs_compra="+document.getElementById("obs_compra").value+"&atualizar=1");
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&cep="+document.getElementById("cep").value+"&endereco="+document.getElementById("endereco").value+"&numero="+document.getElementById("numero").value+"&complemento="+document.getElementById("complemento").value+"&bairro="+document.getElementById("bairro").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&cpf="+document.getElementById("cpf").value+"&telefone="+document.getElementById("telefone").value+"&nome_cliente_compra="+document.getElementById("nome_cliente_compra").value+"&obs_compra="+document.getElementById("obs_compra").value+"&forma_de_pagamento="+document.getElementById("forma_de_pagamento").value+"&atualizar=1");
 			
 			
 		
@@ -484,23 +507,37 @@ function verificar_vazio(){
 			
 			var str = xmlHttp.responseText.trim();
 			
-				if(atualizar_e_pagar == 1){
+				if(atualizar_e_pagar == 'sim'){
+				
+					if(document.getElementById("forma_de_pagamento").value == 'pagar_pelo_app'){
 					
-					if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
-					
-						alert('Seu carrinho está vazio!');
-						window.location.href="vitrine_virtual.html";
+						if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
+						
+							alert('Seu carrinho está vazio!');
+							window.location.href="vitrine_virtual.html";
+							
+						}else{
+						
+							window.location.href="pagar.html";
+							
+						}//fim do else
 						
 					}else{
 					
-						window.location.href="pagar.html";
-						
+						if(document.getElementById("forma_de_pagamento").value == 'pagar_na_entrega'){
+					
+							//Colocar a div carregando
+							document.getElementById("img_carregando").style.visibility = 'visible';
+							//Chamar ajax para mudar status das compras para pagar na entrega
+							startRequest_pagar_na_entrega();
+							
+						}//fim do if
+					
 					}//fim do else
 					
 				}else{
 				
 					window.location.href="finalizar_compra.html";
-					
 					
 				}//fim do else
 				
@@ -636,7 +673,62 @@ function verificar_vazio(){
 			}
 </script>
 		 
+<script type="text/javascript">
 
+
+			function createXMLHttpRequest_pagar_na_entrega() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_pagar_na_entrega() {
+			createXMLHttpRequest_pagar_na_entrega();
+			xmlHttp.onreadystatechange = handleStateChange_pagar_na_entrega;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_pagar_na_entrega.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			
+			}
+
+			
+			function handleStateChange_pagar_na_entrega() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				alert('Sua solicitação foi feita com sucesso! Seus produtos serão enviados!');
+				window.location.href = "historico_usuario.html";
+				
+			}
+			}
+			}
+			
+		
+			
+</script>   
+
+
+ <div id="img_carregando" style=" position: fixed; visibility: hidden; top:0em; height:100%; width:100%; opacity: 0.8; filter: alpha(opacity=80); background-color: white;">
+	 <center>
+		<img  src="https://s3.amazonaws.com/figuras-acheloja-do-site/carregando_novo.gif" style="border-radius:25px; position: relative; top:10em;  height:7em; width:auto; " />
+	 </center>
+ </div>
 		 
 
 </body>
