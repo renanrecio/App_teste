@@ -512,32 +512,20 @@ function verificar_vazio(){
 			
 				if(atualizar_e_pagar == 'sim'){
 				
-					if(document.getElementById("forma_de_pagamento").value == 'pagar_pelo_app'){
 					
-						if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
-						
-							alert('Seu carrinho está vazio!');
-							window.location.href="vitrine_virtual.html";
-							
-						}else{
-						
-							startRequest_calcular_valor_frete(); //Se tudo estiver certo manda atualizar os valores do frete e pagar em seguida
-							
-							
-						}//fim do else
+					if( document.getElementById("valor_total_com_frete_na_barra_inferior").innerHTML == '0.00'){
+					
+						alert('Seu carrinho está vazio!');
+						window.location.href="vitrine_virtual.html";
 						
 					}else{
 					
-						if(document.getElementById("forma_de_pagamento").value == 'pagar_na_entrega'){
-					
-							//Colocar a div carregando
-							document.getElementById("img_carregando").style.visibility = 'visible';
-							//Chamar ajax para mudar status das compras para pagar na entrega
-							startRequest_pagar_na_entrega();
-							
-						}//fim do if
-					
+						startRequest_calcular_valor_frete(); //Se tudo estiver certo manda atualizar os valores do frete e pagar em seguida
+						
+						
 					}//fim do else
+						
+					
 					
 				}else{
 				
