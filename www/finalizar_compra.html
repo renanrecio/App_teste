@@ -288,7 +288,8 @@ body{
 				//Frete abaixo//
 				///////////////
 				
-				frete = Number(str.substring(0, pos_p)).toFixed(2);
+				
+				frete = Number(str.substring(0, pos_p).replace(",", ".")).toFixed(2);
 				
 				document.getElementById("valor_frete").innerHTML = frete;
 				
@@ -301,7 +302,7 @@ body{
 				
 				soma_valores_produtos = document.getElementById("valor_total_sem_frete").innerHTML;
 				
-				soma_valores_produtos = Number(soma_valores_produtos).toFixed(2);
+				soma_valores_produtos = Number(soma_valores_produtos.replace(",", ".")).toFixed(2);
 				
 				valor_final =  Number(soma_valores_produtos) + Number(frete);
 				
