@@ -316,6 +316,8 @@ body{
 				document.getElementById("botao_finalizar_pedido").setAttribute('value','Finalizar pedido');
 				
 				
+				if(atualizar_e_pagar == 'sim')	window.location.href="pagar.html";
+				
 				
 				
 			}
@@ -519,7 +521,8 @@ function verificar_vazio(){
 							
 						}else{
 						
-							window.location.href="pagar.html";
+							startRequest_calcular_valor_frete(); //Se tudo estiver certo manda atualizar os valores do frete e pagar em seguida
+							
 							
 						}//fim do else
 						
