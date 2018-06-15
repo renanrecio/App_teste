@@ -132,17 +132,19 @@ body{
 			createXMLHttpRequest_cancelar_produto();
 			xmlHttp.onreadystatechange = handleStateChange_cancelar_produto;
 			
-		
-			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_cancelar_produto.php", true);
-			
-			
-			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			
-			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
-			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&id_venda="+id_venda);
-			
-			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
-			
+			var answer = confirm("Tem certeza que deseja cancelar esse pedido?");
+				if (answer){
+					xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_cancelar_produto.php", true);
+					
+					
+					xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+					//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+					xmlHttp.send("id_loja="+id_loja+"&id_usuario="+localStorage.id_usuario+"&id_venda="+id_venda);
+					
+					//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+					
+				}//fim do if
 			
 			
 			}
@@ -407,6 +409,8 @@ body{
 					document.getElementById('div_historico_usuario').innerHTML = '';
 					$('#div_historico_usuario').append( xmlHttp.responseText.trim() );
 					//alert(''+xmlHttp.responseText.trim()+'');
+					
+					window.scrollTo(0, 0);
 				
 				
 			}
