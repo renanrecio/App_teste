@@ -46,7 +46,12 @@ body{
 		<div id="div_historico_lojista"></div>
 		
 		
-		<span id="div_fechar_detalhes_historico" onclick=" startRequest_historico_usuario(); document.getElementById('div_fechar_detalhes_historico').style.visibility = 'hidden'; " style="position: fixed; top:3em; right:1em; visibility: hidden; font-weight:bold; font-size:1.5em; cursor:pointer; color: black;" >X</span>
+		<span id="div_fechar_detalhes_historico" onclick=" startRequest_historico_usuario(); document.getElementById('div_fechar_detalhes_historico').style.visibility = 'hidden'; " style="position: fixed; top:3em; right:1em; visibility: hidden; font-weight:bold; font-size:1.5em; cursor:pointer; color: black;" >Voltar</span>
+		<span id="div_fechar_detalhes_historico_produtos"  onclick="document.getElementById('div_historico_lojista_produtos').style.visibility = 'hidden'; document.getElementById('div_fechar_detalhes_historico_produtos').style.visibility = 'hidden'; document.getElementById('div_historico_lojista').style.display = 'block'; document.getElementById('div_fechar_detalhes_historico').style.display = 'block'; " style="position: fixed; top:3em; right:1em; visibility: hidden; font-weight:bold; font-size:1.5em; cursor:pointer; color: black;" >Voltar</span>
+		
+		
+		<div id="div_historico_lojista_produtos"></div>
+			
 			
 			
 		<!--
@@ -437,6 +442,65 @@ body{
 			}
 	
 	
+</script>
+
+
+
+<script type="text/javascript">
+
+			function createXMLHttpRequest_ver_produtos_do_pedido() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_ver_produtos_do_pedido(id_usuario, token, data_venda) {
+			createXMLHttpRequest_ver_produtos_do_pedido();
+			xmlHttp.onreadystatechange = handleStateChange_ver_produtos_do_pedido;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_ver_produtos_do_pedido.php", true);
+			
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+			xmlHttp.send("id_loja="+id_loja+"&id_usuario="+id_usuario+"&token="+token+"&data_venda="+data_venda);
+			
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			}
+
+			
+			function handleStateChange_ver_produtos_do_pedido() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				document.getElementById('div_fechar_detalhes_historico_produtos').style.visibility = 'visible';
+				document.getElementById('div_historico_lojista_produtos').style.visibility = 'visible';
+					
+					document.getElementById('div_historico_lojista_produtos').innerHTML = '';
+					$('#div_historico_lojista_produtos').append( xmlHttp.responseText.trim() );
+					
+				document.getElementById('div_historico_lojista').style.display = 'none'; 
+				document.getElementById('div_fechar_detalhes_historico').style.display = 'none';
+				
+				
+			}
+			}
+			}
+			
+		
+			
+			
 </script>
 
 
