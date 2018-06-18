@@ -451,11 +451,29 @@ function verificar_vazio(){
 		
 	}
 	
+	conteudo = document.getElementById("ddd").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo DDD");
+		document.getElementById("ddd").focus();
+		return false;
+		
+	}
+	
 	conteudo = document.getElementById("nome_cliente_compra").value;
 	if(conteudo == ""){
 		
 		alert("Preencha o campo com seu Nome");
 		document.getElementById("nome_cliente_compra").focus();
+		return false;
+		
+	}
+	
+	conteudo = document.getElementById("sobrenome_cliente_compra").value;
+	if(conteudo == ""){
+		
+		alert("Preencha o campo com seu Sobrenome");
+		document.getElementById("sobrenome_cliente_compra").focus();
 		return false;
 		
 	}
