@@ -244,9 +244,12 @@ body{
 			
 			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			
-			//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
-			xmlHttp.send("id_loja="+id_loja+"&id_venda="+id_venda);
-			
+			var answer = confirm("Tem certeza que deseja mudar o status desse pedido para enviado/entregue?");
+			if (answer){
+				//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+				xmlHttp.send("id_loja="+id_loja+"&id_venda="+id_venda);
+			}
+					
 			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
 			
 			
