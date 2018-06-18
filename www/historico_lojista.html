@@ -117,6 +117,8 @@ body{
 				
 				//document.getElementById("img_carregando_produtos").style.visibility = "hidden";
 				
+				window.scrollTo(0, 0);
+				
 				
 			}
 			}
@@ -429,11 +431,15 @@ body{
 					document.getElementById('div_historico_lojista').innerHTML = '';
 					$('#div_historico_lojista').append( xmlHttp.responseText.trim() );
 					//alert(''+xmlHttp.responseText.trim()+'');
+					
+					window.scrollTo(0, 0);
 				}else{
 					
 					alert("Ocorreu algum problema!")
 					
 				}
+				
+				
 				
 						
 				
@@ -493,6 +499,8 @@ body{
 					
 				document.getElementById('div_historico_lojista').style.display = 'none'; 
 				document.getElementById('div_fechar_detalhes_historico').style.display = 'none';
+				
+				window.scrollTo(0, 0);
 				
 				
 			}
