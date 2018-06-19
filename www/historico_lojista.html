@@ -514,6 +514,109 @@ body{
 
 
 
+<script type="text/javascript">
+
+
+			function createXMLHttpRequest_mudar_status_para_enviado() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_mudar_status_para_enviado(id_venda) {
+			createXMLHttpRequest_mudar_status_para_enviado();
+			xmlHttp.onreadystatechange = handleStateChange_mudar_status_para_enviado;
+			
+		
+			xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_mudar_status_para_enviado.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			var answer = confirm("Tem certeza que deseja mudar o status desse pedido para enviado/entregue?");
+			if (answer){
+				//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+				xmlHttp.send("id_loja="+id_loja+"&id_venda="+id_venda);
+			}
+					
+			//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+			
+			
+			
+			}
+
+			
+			function handleStateChange_mudar_status_para_enviado() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				location.reload();
+				
+			}
+			}
+			}
+			
+		
+			
+</script>   
+
+
+<script type="text/javascript">
+
+
+			function createXMLHttpRequest_cancelar_produto_pelo_lojista() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+
+			function startRequest_cancelar_produto_pelo_lojista(id_venda) {
+			createXMLHttpRequest_cancelar_produto_pelo_lojista();
+			xmlHttp.onreadystatechange = handleStateChange_cancelar_produto_pelo_lojista;
+			
+				var answer = confirm("Tem certeza que deseja cancelar esse pedido?");
+				if (answer){
+					xmlHttp.open("POST", "http://52.201.119.168/AcheLoja/sistematize_vendas/ajax_cancelar_produto_pelo_lojista.php", true);
+					
+					
+					xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					
+					//xmlHttp.send("nick_site="+localStorage.nick_site+"&id_usuario="+localStorage.id_usuario);
+					xmlHttp.send("id_loja="+id_loja+"&id_venda="+id_venda);
+					
+					//document.getElementById("img_carregando_produtos").style.visibility = "visible";
+				
+				}//fim do if
+			
+			
+			}
+
+			
+			function handleStateChange_cancelar_produto_pelo_lojista() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+			//document.getElementById("resultado").innerHTML = xmlHttp.responseText.trim();
+			//document.getElementById("verifica_login").value = xmlHttp.responseText.trim();
+			
+				
+				location.reload();
+				
+			}
+			}
+			}
+			
+		
+			
+</script>   
 
 
 		 
